@@ -1,6 +1,7 @@
 {
   "name": "freesnd",
   "version": "0.1.0",
+  "homepage": "http://hisschemoller.github.io/freesnd",
   "private": true,
   "dependencies": {
     "react": "^16.0.0",
