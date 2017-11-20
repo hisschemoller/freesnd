@@ -1,30 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { count } from '../actions/searchActions'
+import { increaseSearchCount, addToSearchHistory } from '../actions/searchActions'
 
 class Search extends Component {
     
-    // constructor(props) {
-    //     super(props);
-    //     this.handleChange = this.handleChange.bind(this);
-    //     this.handleSubmit = this.handleSubmit.bind(this);
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: ''
+        };
+        this.handleChange = this.handleChange.bind(this);
+    }
     
     handleChange = (e) => {
-        // this.setState({
-        //     value: e.target.value
-        // });
+        this.setState({
+            value: e.target.value
+        });
     }
     
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.dispatch(count());
+        this.props.dispatch(increaseSearchCount());
+        this.props.dispatch(addToSearchHistory(this.state.value));
     }
     
     render() {
         return (
             <form className="search" onSubmit={this.handleSubmit}>
-                <input type="text" value={this.props.value} onChange={this.handleChange} />
+                <input type="text" value={this.state.value} onChange={this.handleChange} />
                 <input type="submit" />
                 <span>Counter: {this.props.count}</span>
             </form>
@@ -34,7 +37,6 @@ class Search extends Component {
 
 function mapStateToProps(state) {
     return {
-        value: state.searchState.value,
         count: state.searchState.count
     };
 }

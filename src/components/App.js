@@ -8,7 +8,7 @@ class App extends Component {
         return (
             <div className="app">
                 <Search />
-                    <Results />
+                <Results />
                 <History />
             </div>
         );
