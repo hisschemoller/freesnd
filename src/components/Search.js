@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { increaseSearchCount, addToSearchHistory } from '../actions/searchActions'
+import { increaseSearchCount, addToSearchHistory, fetchSounds } from '../actions/searchActions'
 
 class Search extends Component {
     
@@ -22,6 +22,7 @@ class Search extends Component {
         e.preventDefault();
         this.props.dispatch(increaseSearchCount());
         this.props.dispatch(addToSearchHistory(this.state.value));
+        this.props.dispatch(fetchSounds(this.state.value));
     }
     
     render() {

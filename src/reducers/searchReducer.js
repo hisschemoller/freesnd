@@ -1,8 +1,9 @@
-import { INCREASE_SEARCH_COUNT, ADD_SEARCH_HISTORY } from '../actions/searchActions';
+import { INCREASE_SEARCH_COUNT, ADD_SEARCH_HISTORY, RECEIVE_SOUNDS } from '../actions/searchActions';
 
 const initialState = {
     count: 0,
-    history: []
+    history: [],
+    results: []
 };
 
 export default function searchReducer(state = initialState, action) {
@@ -17,6 +18,10 @@ export default function searchReducer(state = initialState, action) {
                     id: state.count,
                     value: action.queryString
                 }]
+            });
+        case RECEIVE_SOUNDS:
+            return Object.assign({}, state, {
+                results: action.sounds.results
             });
         default:
             return state;

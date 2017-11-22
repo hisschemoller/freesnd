@@ -3,7 +3,9 @@
  */
 export const INCREASE_SEARCH_COUNT = 'INCREASE_SEARCH_COUNT';
 export const ADD_SEARCH_HISTORY = 'ADD_SEARCH_HISTORY';
-export const FETCH_SOUNDS = 'FETCH_SOUNDS';
+export const REQUEST_SOUNDS = 'REQUEST_SOUNDS';
+export const RECEIVE_SOUNDS = 'RECEIVE_SOUNDS';
+export const REJECT_SOUNDS = 'REJECT_SOUNDS';
 
 /**
  * Action creators
@@ -16,6 +18,43 @@ export function addToSearchHistory(queryString) {
     return { type: ADD_SEARCH_HISTORY, queryString: queryString }
 }
 
-export function fetchSounds(text) {
-    return { type: FETCH_SOUNDS, text }
+export function requestSounds(queryString) {
+    return {
+        type: REQUEST_SOUNDS,
+        queryString
+    };
+}
+
+export function receiveSounds(queryString, json) {
+    return {
+        type: RECEIVE_SOUNDS,
+        queryString,
+        // sounds: json.data.children.map(child => child.data),
+        sounds: json,
+        receivedAt: Date.now()
+    };
+}
+
+export function rejectSounds(error) {
+    return {
+        type: REJECT_SOUNDS,
+        error: error
+    };
+}
+
+export function fetchSounds(queryString) {
+    const url = 'https://freesound.org/apiv2/',
+        token = '97fXJpalkrThSLwam15I5FZBSqYOHvk3DUbwCj65';
+    return function(dispatch) {
+        dispatch(requestSounds(queryString));
+        return fetch(`${url}search/text/?format=json&query=${queryString}&token=${token}`)
+            .then(
+                response => response.json(),
+                error => dispatch(rejectSounds(error))
+            )
+            .then(
+                json => dispatch(receiveSounds(queryString, json)),
+                error => dispatch(rejectSounds(error))
+            )
+    }
 }

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Result from './Result';
 
 class Results extends Component {
     
@@ -6,10 +8,20 @@ class Results extends Component {
         return (
             <div className="results">
                 <h4>Search results</h4>
-                <div className="results__list"></div>
+                <ul className="results__list">
+                    {this.props.results.map(result => (
+                        <Result key={result.id} name={result.name}  />
+                    ))}
+                </ul>
             </div>
         );
     }
 }
 
-export default Results;
+function mapStateToProps(state) {
+    return {
+        results: state.searchState.results
+    };
+}
+
+export default connect(mapStateToProps)(Results);
