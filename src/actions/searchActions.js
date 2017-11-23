@@ -43,11 +43,13 @@ export function rejectSounds(error) {
 }
 
 export function fetchSounds(queryString) {
-    const url = 'https://freesound.org/apiv2/',
-        token = '97fXJpalkrThSLwam15I5FZBSqYOHvk3DUbwCj65';
+    const url = 'https://freesound.org/apiv2/search/text/',
+        token = '97fXJpalkrThSLwam15I5FZBSqYOHvk3DUbwCj65',
+        page = 1,
+        fields = 'id,name,description,previews,images';
     return function(dispatch) {
         dispatch(requestSounds(queryString));
-        return fetch(`${url}search/text/?format=json&query=${queryString}&token=${token}`)
+        return fetch(`${url}?format=json&query=${queryString}&token=${token}&page=${page}&fields=${fields}`)
             .then(
                 response => response.json(),
                 error => dispatch(rejectSounds(error))

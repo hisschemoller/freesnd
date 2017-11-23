@@ -1,0 +1,34 @@
+
+<App>
+    <Search></Search>
+    <Results></Results>
+</App>
+
+
+{
+    count: 0,
+    history: [
+        {
+            id: '',
+            value: ''
+        }
+    ],
+    sounds: {
+        count: #,
+        next: 'url',
+        previous: 'url',
+        results: [
+            #: {
+                id: #,
+                license: '',
+                name: '',
+                tags: ['', '', ''],
+                username: ''
+            }
+        ]
+    }
+}
+
+https://freesound.org/apiv2/search/text/?format=json&query=piano&token=97fXJpalkrThSLwam15I5FZBSqYOHvk3DUbwCj65
+
+97fXJpalkrThSLwam15I5FZBSqYOHvk3DUbwCj65
