@@ -1,24 +1,26 @@
 {
-  "name": "freesnd",
-  "version": "0.1.0",
-  "homepage": "http://hisschemoller.github.io/freesnd",
-  "private": true,
-  "dependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-redux": "^5.0.6",
-    "react-scripts": "1.0.17",
-    "redux": "^3.7.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
-  },
-  "devDependencies": {
-    "gh-pages": "^1.0.0"
-  }
+    "name": "freesnd",
+    "version": "0.1.0",
+    "homepage": "http://hisschemoller.github.io/freesnd",
+    "private": true,
+    "dependencies": {
+        "react": "^16.0.0",
+        "react-dom": "^16.0.0",
+        "redux-logger": "^3.0.6",
+        "react-redux": "^5.0.6",
+        "react-scripts": "1.0.17",
+        "redux-thunk": "^2.2.0",
+        "redux": "^3.7.2"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject",
+        "predeploy": "yarn run build",
+        "deploy": "gh-pages -d build"
+    },
+    "devDependencies": {
+        "gh-pages": "^1.0.0"
+    }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import History from './History';
-import Results from './Results';
+import Results from './Results/Results';
 import Search from './Search';
 
 class App extends Component {
