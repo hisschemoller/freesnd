@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import s from './Result.css';
 
 class Result extends Component {
     render() {
-        return (<li>
-            <img src={this.props.img} alt={this.props.name}/>
-            <p>{this.props.name}</p>
-        </li>);
+        return (
+            <li className={s.listItem}>
+                <img src={this.props.img} alt={this.props.name}/>
+                <span className={s.name}>{this.props.name}</span>
+            </li>);
     }
 }
 
