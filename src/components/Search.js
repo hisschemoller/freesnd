@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { increaseSearchCount, addToSearchHistory, fetchSounds } from '../actions/searchActions'
+import { increaseSearchCount, addToSearchHistory, setQuery, fetchSounds } from '../actions/searchActions';
 
 class Search extends Component {
     
@@ -16,13 +16,15 @@ class Search extends Component {
         this.setState({
             value: e.target.value
         });
+        
     }
     
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.dispatch(increaseSearchCount());
         this.props.dispatch(addToSearchHistory(this.state.value));
-        this.props.dispatch(fetchSounds(this.state.value));
+        this.props.dispatch(setQuery(this.state.value));
+        this.props.dispatch(fetchSounds());
     }
     
     render() {

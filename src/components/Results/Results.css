@@ -7,3 +7,20 @@
 .list {
     list-style: none;
 }
+.pagination {
+    display: flex;
+}
+.pagination a {
+    color: #ccc;
+    cursor: default;
+}
+.pagination a.active {
+    color: #00f;
+    cursor: pointer;
+}
+.previous {
+    
+}
+.next {
+    
+}
