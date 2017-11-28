@@ -1,4 +1,4 @@
-import { INCREASE_SEARCH_COUNT, ADD_SEARCH_HISTORY, RECEIVE_SOUNDS, SET_QUERY, NEXT_PAGE, PREVIOUS_PAGE } from '../actions/searchActions';
+import { ADD_SEARCH_HISTORY, RECEIVE_SOUNDS, SET_QUERY, NEXT_PAGE, PREVIOUS_PAGE } from '../actions/searchActions';
 
 const initialState = {
     query: '',
@@ -11,10 +11,6 @@ const initialState = {
 
 export default function searchReducer(state = initialState, action) {
     switch (action.type) {
-        case INCREASE_SEARCH_COUNT:
-            return Object.assign({}, state, {
-                count: state.count + 1
-            });
         case ADD_SEARCH_HISTORY:
             return Object.assign({}, state, {
                 history: [ ...state.history, {
