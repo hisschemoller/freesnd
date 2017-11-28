@@ -3,6 +3,7 @@ import { INCREASE_SEARCH_COUNT, ADD_SEARCH_HISTORY, RECEIVE_SOUNDS, SET_QUERY, N
 const initialState = {
     query: '',
     page: 0,
+    pageSize: 15,
     count: 0,
     history: [],
     results: []
@@ -36,6 +37,7 @@ export default function searchReducer(state = initialState, action) {
             });
         case RECEIVE_SOUNDS:
             return Object.assign({}, state, {
+                count: action.sounds.count,
                 results: action.sounds.results
             });
         default:

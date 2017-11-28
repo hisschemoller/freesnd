@@ -70,9 +70,10 @@ export function fetchSounds() {
         fields = 'id,name,description,previews,images';
     return function(dispatch, getState) {
         const query = getState().searchState.query,
-            page = getState().searchState.page;
+            page = getState().searchState.page,
+            pageSize = getState().searchState.pageSize;
         dispatch(requestSounds(query));
-        return fetch(`${url}?format=json&query=${query}&token=${token}&page=${page}&fields=${fields}`)
+        return fetch(`${url}?format=json&query=${query}&token=${token}&page=${page}&page_size=${pageSize}&fields=${fields}`)
             .then(
                 response => response.json(),
                 error => dispatch(rejectSounds(error))

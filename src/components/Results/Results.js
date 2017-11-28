@@ -30,7 +30,7 @@ class Results extends Component {
                 </ul>
                 <div className={s.pagination}>
                     <button type="button" className={previousClassNames} onClick={this.handlePreviousPage}>Previous</button>
-                    <span>{this.props.page}</span>
+                    <span>{this.props.page}/{Math.ceil(this.props.count / this.props.pageSize)}</span>
                     <button type="button" className={nextClassNames} onClick={this.handleNextPage}>Next</button>
                 </div>
             </div>
@@ -41,6 +41,8 @@ class Results extends Component {
 function mapStateToProps(state) {
     return {
         page: state.searchState.page,
+        pageSize: state.searchState.pageSize,
+        count: state.searchState.count,
         results: state.searchState.results
     };
 }
