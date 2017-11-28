@@ -6,6 +6,7 @@ class Result extends Component {
         return (
             <li className={s.listItem}>
                 <img src={this.props.img} alt={this.props.name} className={s.waveform}/>
+                <button>p</button>
                 <span className={s.name}>{this.props.name}</span>
             </li>);
     }
