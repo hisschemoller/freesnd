@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { PLAY_PREVIEW } from '../actions/audioActions';
+import { clearEventQueue, PLAY_PREVIEW } from '../actions/audioActions';
 
 class WebAudio extends Component {
     
@@ -19,9 +19,7 @@ class WebAudio extends Component {
     
     componentWillUpdate(nextProps, nextState) {
         nextProps.events.forEach(this.processEvent.bind(this));
-        nextProps.dispatch({
-            type: 'CLEAR_EVENT_QUEUE'
-        });
+        nextProps.dispatch(clearEventQueue());
     }
     
     processEvent(event) {
