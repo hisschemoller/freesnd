@@ -16,7 +16,9 @@ const reducer = combineReducers({
 	searchState: searchReducer
 });
 
-const loggerMiddleware = createLogger();
+const loggerMiddleware = createLogger({
+    collapsed: true
+});
 
 const store = createStore(
     reducer,
