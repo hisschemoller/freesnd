@@ -7,10 +7,12 @@ import thunkMiddleware from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import App from './components/App';
+import audioReducer from './reducers/audioReducer';
 import searchReducer from './reducers/searchReducer';
 // import { fetchSounds } from './actions/searchActions'; 
 
 const reducer = combineReducers({
+    audioState: audioReducer,
 	searchState: searchReducer
 });
 

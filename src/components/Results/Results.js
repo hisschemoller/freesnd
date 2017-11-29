@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { playPreview } from '../../actions/audioActions';
 import { nextPage, previousPage, fetchSounds } from '../../actions/searchActions';
 import Result from './Result';
 import s from './Results.css';
@@ -16,6 +17,10 @@ class Results extends Component {
         this.props.dispatch(fetchSounds());
     }
     
+    onPreviewClick = (previewUrl) => {
+        this.props.dispatch(playPreview(previewUrl));
+    }
+    
     render() {
         const previousClassNames = `${s.previous} ${this.props.previous ? s.active : ''}`;
         const nextClassNames = `${s.next} ${this.props.next ? s.active : ''}`;
@@ -25,7 +30,12 @@ class Results extends Component {
                 <h4 className={s.header}>Search results</h4>
                 <ul className={s.list}>
                     {this.props.results.map(result => (
-                        <Result key={result.id} name={result.name} img={result.images.waveform_m}  />
+                        <Result 
+                            key={result.id} 
+                            name={result.name} 
+                            img={result.images.waveform_m}
+                            previewUrl={result.previews['preview-lq-mp3']}
+                            onPreviewClick={this.onPreviewClick} />
                     ))}
                 </ul>
                 <div className={s.pagination}>
