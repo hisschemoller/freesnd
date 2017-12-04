@@ -5,6 +5,8 @@ export const ADD_SEARCH_HISTORY = 'ADD_SEARCH_HISTORY';
 export const SET_QUERY = 'SET_QUERY';
 export const NEXT_PAGE = 'NEXT_PAGE';
 export const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
+export const NEXT_SOUND = 'NEXT_SOUND';
+export const PREVIOUS_SOUND = 'PREVIOUS_SOUND';
 export const REQUEST_SOUNDS = 'REQUEST_SOUNDS';
 export const RECEIVE_SOUNDS = 'RECEIVE_SOUNDS';
 export const REJECT_SOUNDS = 'REJECT_SOUNDS';
@@ -32,6 +34,18 @@ export function nextPage() {
 export function previousPage() {
     return {
         type: PREVIOUS_PAGE
+    };
+}
+
+export function nextSound() {
+    return {
+        type: NEXT_SOUND
+    };
+}
+
+export function previousSound() {
+    return {
+        type: PREVIOUS_SOUND
     };
 }
 

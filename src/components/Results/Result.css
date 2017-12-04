@@ -1,5 +1,9 @@
-.listItem {
+.listitem {
+    color: #ccc;
     display: flex;
+}
+.listitem--active {
+    color: #999;
 }
 .name {
     

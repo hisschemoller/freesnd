@@ -29,13 +29,14 @@ class Results extends Component {
             <div className={s.root}>
                 <h4 className={s.header}>Search results</h4>
                 <ul className={s.list}>
-                    {this.props.results.map(result => (
+                    {this.props.results.map((result, i) => (
                         <Result 
                             key={result.id} 
                             name={result.name} 
                             img={result.images.waveform_m}
                             previewUrl={result.previews['preview-lq-mp3']}
-                            onPreviewClick={this.onPreviewClick} />
+                            onPreviewClick={this.onPreviewClick}
+                            active={i === this.props.selectedIndex} />
                     ))}
                 </ul>
                 <div className={s.pagination}>
@@ -53,7 +54,8 @@ function mapStateToProps(state) {
         page: state.searchState.page,
         pageSize: state.searchState.pageSize,
         count: state.searchState.count,
-        results: state.searchState.results
+        results: state.searchState.results,
+        selectedIndex: state.searchState.selectedIndex
     };
 }
 

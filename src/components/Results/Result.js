@@ -8,8 +8,9 @@ class Result extends Component {
     }
 
     render() {
+        const classNames = `${s.listitem} ${this.props.active ? s['listitem--active'] : ''}`;
         return (
-            <li className={s.listItem}>
+            <li className={classNames}>
                 <img src={this.props.img} alt={this.props.name} className={s.waveform}/>
                 <button onClick={this.onPreviewClick}>p</button>
                 <span className={s.name}>{this.props.name}</span>

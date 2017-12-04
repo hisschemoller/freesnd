@@ -1,4 +1,4 @@
-import { ADD_SEARCH_HISTORY, RECEIVE_SOUNDS, SET_QUERY, NEXT_PAGE, PREVIOUS_PAGE } from '../actions/searchActions';
+import { ADD_SEARCH_HISTORY, RECEIVE_SOUNDS, SET_QUERY, NEXT_PAGE, PREVIOUS_PAGE, NEXT_SOUND, PREVIOUS_SOUND } from '../actions/searchActions';
 
 const initialState = {
     query: '',
@@ -6,7 +6,8 @@ const initialState = {
     pageSize: 15,
     count: 0,
     history: [],
-    results: []
+    results: [],
+    selectedIndex: null
 };
 
 export default function searchReducer(state = initialState, action) {
@@ -31,10 +32,21 @@ export default function searchReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 page: Math.max(1, state.page - 1)
             });
+        case NEXT_SOUND:
+            return Object.assign({}, state, {
+                selectedIndex: (state.selectedIndex === null) ? 0 : (state.selectedIndex + 1) % state.results.length
+            });
+        case PREVIOUS_SOUND:
+            let index = (state.selectedIndex === null) ? state.results.length - 1 : state.selectedIndex - 1;
+            index = (index < 0) ? index += state.results.length : index;
+            return Object.assign({}, state, {
+                selectedIndex: index
+            });
         case RECEIVE_SOUNDS:
             return Object.assign({}, state, {
                 count: action.sounds.count,
-                results: action.sounds.results
+                results: action.sounds.results,
+                selectedIndex: null
             });
         default:
             return state;
