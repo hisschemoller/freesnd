@@ -3,8 +3,12 @@ import s from './Result.css';
 
 class Result extends Component {
 
-    onPreviewClick = (e) => {
-        this.props.onPreviewClick(this.props.previewUrl);
+    onPreviewButtonDown = (e) => {
+        this.props.onPreviewButtonDown(this.props.previewUrl);
+    }
+    
+    onPreviewButtonUp = (e) => {
+        this.props.onPreviewButtonUp(this.props.previewUrl);
     }
 
     render() {
@@ -12,7 +16,7 @@ class Result extends Component {
         return (
             <li className={classNames}>
                 <img src={this.props.img} alt={this.props.name} className={s.waveform}/>
-                <button onClick={this.onPreviewClick}>p</button>
+                <button onMouseDown={this.onPreviewButtonDown} onMouseUp={this.onPreviewButtonUp}>p</button>
                 <span className={s.name}>{this.props.name}</span>
             </li>);
     }

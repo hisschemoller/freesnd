@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { playPreview } from '../../actions/audioActions';
+import { startPreview, stopPreview } from '../../actions/audioActions';
 import { nextPage, previousPage, nextSound, previousSound, fetchSounds } from '../../actions/searchActions';
 import Result from './Result';
 import s from './Results.css';
@@ -21,7 +21,7 @@ class Results extends Component {
         const hasChangedIndex = nextProps.selectedIndex !== this.props.selectedIndex && nextProps.selectedIndex !== null;
         if (hasResults && hasChangedIndex) {
             const previewUrl = nextProps.results[nextProps.selectedIndex].previews['preview-lq-mp3'];
-            this.props.dispatch(playPreview(previewUrl));
+            this.props.dispatch(startPreview(previewUrl));
         }
     }
         
@@ -54,8 +54,12 @@ class Results extends Component {
         this.props.dispatch(fetchSounds());
     }
     
-    onPreviewClick = (previewUrl) => {
-        this.props.dispatch(playPreview(previewUrl));
+    startPreview = (previewUrl) => {
+        this.props.dispatch(startPreview(previewUrl));
+    }
+    
+    stopPreview = (previewUrl) => {
+        this.props.dispatch(stopPreview(previewUrl));
     }
     
     render() {
@@ -72,7 +76,8 @@ class Results extends Component {
                             name={result.name} 
                             img={result.images.waveform_m}
                             previewUrl={result.previews['preview-lq-mp3']}
-                            onPreviewClick={this.onPreviewClick}
+                            onPreviewButtonDown={this.startPreview}
+                            onPreviewButtonUp={this.stopPreview}
                             active={i === this.props.selectedIndex} />
                     ))}
                 </ul>
