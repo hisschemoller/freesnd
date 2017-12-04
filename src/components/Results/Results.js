@@ -27,8 +27,14 @@ class Results extends Component {
         
     onDocumentKeyup = (e) => {
         switch (e.keyCode) {
+            case 37: // left arrow
+                this.gotoPreviousPage();
+                break;
             case 38: // up arrow
                 this.props.dispatch(previousSound());
+                break;
+            case 39: // right arrow
+                this.gotoNextPage();
                 break;
             case 40: // down arrow
                 this.props.dispatch(nextSound());
@@ -38,12 +44,12 @@ class Results extends Component {
         }
     } 
 
-    handleNextPage = () => {
+    gotoNextPage = () => {
         this.props.dispatch(nextPage());
         this.props.dispatch(fetchSounds());
     }
     
-    handlePreviousPage = () => {
+    gotoPreviousPage = () => {
         this.props.dispatch(previousPage());
         this.props.dispatch(fetchSounds());
     }
@@ -71,9 +77,9 @@ class Results extends Component {
                     ))}
                 </ul>
                 <div className={s.pagination}>
-                    <button type="button" className={previousClassNames} onClick={this.handlePreviousPage}>Previous</button>
+                    <button type="button" className={previousClassNames} onClick={this.gotoPreviousPage}>Previous</button>
                     <span>{this.props.page}/{Math.ceil(this.props.count / this.props.pageSize)}</span>
-                    <button type="button" className={nextClassNames} onClick={this.handleNextPage}>Next</button>
+                    <button type="button" className={nextClassNames} onClick={this.gotoNextPage}>Next</button>
                 </div>
             </div>
         );
