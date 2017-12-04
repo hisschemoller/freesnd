@@ -1,11 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { playPreview } from '../../actions/audioActions';
-import { nextPage, previousPage, fetchSounds } from '../../actions/searchActions';
+import { nextPage, previousPage, nextSound, previousSound, fetchSounds } from '../../actions/searchActions';
 import Result from './Result';
 import s from './Results.css';
 
 class Results extends Component {
+    
+    componentDidMount() {
+        document.addEventListener('keyup', this.onDocumentKeyup);
+    }
+    
+    componentWillUnmount() {
+        document.removeEventListener('keyup', this.onDocumentKeyup);
+    }
+    
+    componentWillUpdate(nextProps, nextState) {
+        // if selected sound changes then play its preview 
+        const hasResults = nextProps.results && nextProps.results.length > 0;
+        const hasChangedIndex = nextProps.selectedIndex !== this.props.selectedIndex && nextProps.selectedIndex !== null;
+        if (hasResults && hasChangedIndex) {
+            const previewUrl = nextProps.results[nextProps.selectedIndex].previews['preview-lq-mp3'];
+            this.props.dispatch(playPreview(previewUrl));
+        }
+    }
+        
+    onDocumentKeyup = (e) => {
+        switch (e.keyCode) {
+            case 38: // up arrow
+                this.props.dispatch(previousSound());
+                break;
+            case 40: // down arrow
+                this.props.dispatch(nextSound());
+                break;
+            default:
+                break;
+        }
+    } 
 
     handleNextPage = () => {
         this.props.dispatch(nextPage());
