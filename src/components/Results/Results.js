@@ -27,14 +27,18 @@ class Results extends Component {
         
     onDocumentKeyup = (e) => {
         switch (e.keyCode) {
-            case 37: // left arrow
-                this.gotoPreviousPage();
+            case 37: // left arrow, go to previous page
+                this.props.dispatch(previousPage());
+                this.props.dispatch(fetchSounds());
+                this.props.dispatch(stopPreview());
                 break;
             case 38: // up arrow
                 this.props.dispatch(previousSound());
                 break;
-            case 39: // right arrow
-                this.gotoNextPage();
+            case 39: // right arrow, go to next page
+                this.props.dispatch(nextPage());
+                this.props.dispatch(fetchSounds());
+                this.props.dispatch(stopPreview());
                 break;
             case 40: // down arrow
                 this.props.dispatch(nextSound());
@@ -42,18 +46,6 @@ class Results extends Component {
             default:
                 break;
         }
-    } 
-
-    gotoNextPage = () => {
-        this.props.dispatch(nextPage());
-        this.props.dispatch(fetchSounds());
-        this.props.dispatch(stopPreview());
-    }
-    
-    gotoPreviousPage = () => {
-        this.props.dispatch(previousPage());
-        this.props.dispatch(fetchSounds());
-        this.props.dispatch(stopPreview());
     }
     
     startPreview = (previewUrl) => {
@@ -71,9 +63,6 @@ class Results extends Component {
     }
     
     render() {
-        const previousClassNames = `${s.previous} ${this.props.previous ? s.active : ''}`;
-        const nextClassNames = `${s.next} ${this.props.next ? s.active : ''}`;
-        
         return (
             <div className={s.root}>
                 <h4 className={s.header}>Search results</h4>
@@ -92,11 +81,6 @@ class Results extends Component {
                             active={i === this.props.selectedIndex} />
                     ))}
                 </ul>
-                <div className={s.pagination}>
-                    <button type="button" className={previousClassNames} onClick={this.gotoPreviousPage}>Previous</button>
-                    <span>{this.props.page}/{Math.ceil(this.props.count / this.props.pageSize)}</span>
-                    <button type="button" className={nextClassNames} onClick={this.gotoNextPage}>Next</button>
-                </div>
             </div>
         );
     }
