@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { startPreview, stopPreview } from '../../actions/audioActions';
-import { addToSearchHistory, setQuery, nextPage, previousPage, nextSound, previousSound, fetchSounds } from '../../actions/searchActions';
+import { addToSearchHistory, setQuery, gotoPage, nextSound, previousSound, fetchSounds } from '../../actions/searchActions';
 import Result from './Result';
 import s from './Results.css';
 
@@ -28,7 +28,7 @@ class Results extends Component {
     onDocumentKeyup = (e) => {
         switch (e.keyCode) {
             case 37: // left arrow, go to previous page
-                this.props.dispatch(previousPage());
+                this.props.dispatch(gotoPage(this.props.page - 1));
                 this.props.dispatch(fetchSounds());
                 this.props.dispatch(stopPreview());
                 break;
@@ -36,7 +36,7 @@ class Results extends Component {
                 this.props.dispatch(previousSound());
                 break;
             case 39: // right arrow, go to next page
-                this.props.dispatch(nextPage());
+                this.props.dispatch(gotoPage(this.props.page + 1));
                 this.props.dispatch(fetchSounds());
                 this.props.dispatch(stopPreview());
                 break;

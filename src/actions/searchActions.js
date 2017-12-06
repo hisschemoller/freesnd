@@ -3,8 +3,7 @@
  */
 export const ADD_SEARCH_HISTORY = 'ADD_SEARCH_HISTORY';
 export const SET_QUERY = 'SET_QUERY';
-export const NEXT_PAGE = 'NEXT_PAGE';
-export const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
+export const GOTO_PAGE = 'GOTO_PAGE';
 export const NEXT_SOUND = 'NEXT_SOUND';
 export const PREVIOUS_SOUND = 'PREVIOUS_SOUND';
 export const REQUEST_SOUNDS = 'REQUEST_SOUNDS';
@@ -25,15 +24,9 @@ export function setQuery(query) {
     };
 }
 
-export function nextPage() {
+export function gotoPage(page) {
     return {
-        type: NEXT_PAGE
-    };
-}
-
-export function previousPage() {
-    return {
-        type: PREVIOUS_PAGE
+        type: GOTO_PAGE, page
     };
 }
 

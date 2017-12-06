@@ -1,32 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { stopPreview } from '../actions/audioActions';
-import { nextPage, previousPage, fetchSounds } from '../actions/searchActions';
+import { gotoPage, fetchSounds } from '../actions/searchActions';
 import s from './Pagination.css';
 
 class Pagination extends Component {
 
-    gotoNextPage = () => {
-        this.props.dispatch(nextPage());
-        this.props.dispatch(fetchSounds());
-        this.props.dispatch(stopPreview());
-    }
-
-    gotoPreviousPage = () => {
-        this.props.dispatch(previousPage());
+    gotoPage = (page) => {
+        this.props.dispatch(gotoPage(page));
         this.props.dispatch(fetchSounds());
         this.props.dispatch(stopPreview());
     }
     
     render() {
-        const previousClassNames = `${s.previous} ${this.props.previous ? s.active : ''}`;
-        const nextClassNames = `${s.next} ${this.props.next ? s.active : ''}`;
+        const numPages = Math.ceil(this.props.count / this.props.pageSize);
         
         return (
             <div className={s.pagination}>
-                <button type="button" className={previousClassNames} onClick={this.gotoPreviousPage}>&lt;</button>
-                <span>{this.props.page}/{Math.ceil(this.props.count / this.props.pageSize)}</span>
-                <button type="button" className={nextClassNames} onClick={this.gotoNextPage}>&gt;</button>
+                <button type="button" onClick={() => this.gotoPage(this.props.page - 1)} disabled={this.props.page <= 1}>&lt;</button>
+                <button type="button" onClick={() => this.gotoPage(1)} disabled={numPages === 0}>1</button>
+                <span>...</span>
+                <span>{this.props.page}</span>
+                <span>...</span>
+                <button type="button" onClick={() => this.gotoPage(numPages)} disabled={numPages === 0}>{numPages}</button>
+                <button type="button" onClick={() => this.gotoPage(this.props.page + 1)} disabled={this.props.page === numPages}>&gt;</button>
             </div>
         );
     }

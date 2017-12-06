@@ -1,4 +1,4 @@
-import { ADD_SEARCH_HISTORY, RECEIVE_SOUNDS, SET_QUERY, NEXT_PAGE, PREVIOUS_PAGE, NEXT_SOUND, PREVIOUS_SOUND } from '../actions/searchActions';
+import { ADD_SEARCH_HISTORY, RECEIVE_SOUNDS, SET_QUERY, GOTO_PAGE, NEXT_SOUND, PREVIOUS_SOUND } from '../actions/searchActions';
 
 const initialState = {
     query: '',
@@ -24,13 +24,9 @@ export default function searchReducer(state = initialState, action) {
                 query: action.query,
                 page: 1
             });
-        case NEXT_PAGE:
+        case GOTO_PAGE:
             return Object.assign({}, state, {
-                page: state.page + 1
-            });
-        case PREVIOUS_PAGE:
-            return Object.assign({}, state, {
-                page: Math.max(1, state.page - 1)
+                page: Math.max(1, Math.min(action.page, Math.ceil(state.count / state.pageSize)))
             });
         case NEXT_SOUND:
             return Object.assign({}, state, {
