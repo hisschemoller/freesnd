@@ -58,8 +58,8 @@ class Results extends Component {
         this.props.dispatch(startPreview(previewUrl));
     }
     
-    stopPreview = (previewUrl) => {
-        this.props.dispatch(stopPreview(previewUrl));
+    stopPreview = () => {
+        this.props.dispatch(stopPreview());
     }
     
     render() {

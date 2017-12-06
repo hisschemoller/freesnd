@@ -8,7 +8,7 @@ class Result extends Component {
     }
     
     onPreviewButtonUp = (e) => {
-        this.props.onPreviewButtonUp(this.props.previewUrl);
+        this.props.onPreviewButtonUp();
     }
 
     render() {

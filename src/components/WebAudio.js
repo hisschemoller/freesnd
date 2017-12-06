@@ -4,6 +4,13 @@ import { clearEventQueue, START_PREVIEW, STOP_PREVIEW } from '../actions/audioAc
 
 class WebAudio extends Component {
     
+    constructor(props) {
+        super(props);
+        this.state = {
+            previewBufferSource: null
+        };
+    }
+    
     componentWillMount() {
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         this.ctx = new AudioContext();
@@ -28,7 +35,7 @@ class WebAudio extends Component {
                 this.startPreview(event.src);
                 break;
             case STOP_PREVIEW:
-                this.stopPreview(event.src);
+                this.stopPreview();
                 break;
             default:
                 console.log('WebAudio unable to process event of type ', event.type);
@@ -39,6 +46,8 @@ class WebAudio extends Component {
         const ctx = this.ctx,
             self = this;
         
+        this.stopPreview();
+        
         fetch(src)
             .then(function(response) {
                 response.arrayBuffer().then(function(buffer) {
@@ -46,11 +55,13 @@ class WebAudio extends Component {
                         const source = ctx.createBufferSource();
                         source.buffer = decodedBuffer;
                         source.onended = () => {
-                            self.stopPreview(src);
+                            self.stopPreview();
                         };
                         source.connect(ctx.destination);
                         source.start();
-                        
+                        const newState = Object.assign({}, self.state);
+                        newState.previewBufferSource = source;
+                        self.setState(newState);
                     })
                 });
             })
@@ -59,8 +70,13 @@ class WebAudio extends Component {
             });
     }
     
-    stopPreview = (src) => {
-        console.log(src);
+    stopPreview = () => {
+        if (this.state.previewBufferSource) {
+            this.state.previewBufferSource.stop();
+            const newState = Object.assign({}, this.state);
+            newState.preview = null;
+            this.setState(newState);
+        }
     }
   
     render() {
