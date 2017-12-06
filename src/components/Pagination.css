@@ -2,9 +2,8 @@
 .pagination {
     display: flex;
 }
-.pagination a {
-    color: #ccc;
-    cursor: default;
+.pagination button[disabled] {
+    display: none;
 }
 .pagination a.active {
     color: #00f;
