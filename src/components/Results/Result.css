@@ -11,3 +11,19 @@
 .waveform {
     display: none;
 }
+.username {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 0.6 rem;
+    text-decoration: underline;
+}
+.tags {
+    font-size: 0.6 rem;
+}
+.tag {
+    background: none;
+    border: none;
+    color: #ccc;
+    text-decoration: underline;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { startPreview, stopPreview } from '../../actions/audioActions';
-import { nextPage, previousPage, nextSound, previousSound, fetchSounds } from '../../actions/searchActions';
+import { addToSearchHistory, setQuery, nextPage, previousPage, nextSound, previousSound, fetchSounds } from '../../actions/searchActions';
 import Result from './Result';
 import s from './Results.css';
 
@@ -64,6 +64,12 @@ class Results extends Component {
         this.props.dispatch(stopPreview());
     }
     
+    performQuery = (query) => {
+        this.props.dispatch(addToSearchHistory(query));
+        this.props.dispatch(setQuery(query));
+        this.props.dispatch(fetchSounds());
+    }
+    
     render() {
         const previousClassNames = `${s.previous} ${this.props.previous ? s.active : ''}`;
         const nextClassNames = `${s.next} ${this.props.next ? s.active : ''}`;
@@ -77,9 +83,12 @@ class Results extends Component {
                             key={result.id} 
                             name={result.name} 
                             img={result.images.waveform_m}
+                            username={result.username}
+                            tags={result.tags}
                             previewUrl={result.previews['preview-lq-mp3']}
                             onPreviewButtonDown={this.startPreview}
                             onPreviewButtonUp={this.stopPreview}
+                            onUserOrTagClick={this.performQuery}
                             active={i === this.props.selectedIndex} />
                     ))}
                 </ul>
