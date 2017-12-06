@@ -47,11 +47,13 @@ class Results extends Component {
     gotoNextPage = () => {
         this.props.dispatch(nextPage());
         this.props.dispatch(fetchSounds());
+        this.props.dispatch(stopPreview());
     }
     
     gotoPreviousPage = () => {
         this.props.dispatch(previousPage());
         this.props.dispatch(fetchSounds());
+        this.props.dispatch(stopPreview());
     }
     
     startPreview = (previewUrl) => {
