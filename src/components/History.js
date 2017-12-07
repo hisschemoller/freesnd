@@ -17,8 +17,7 @@ class History extends Component {
                 <div className="history">
                     {
                         this.props.history.map((item, i) => (
-                            // <HistoryItem key={i} value={item.value} onClick={} />
-                            <button type="button" onClick={ () => this.performQuery(item.value) } >{item.value}</button>
+                            <button type="button" key={i} onClick={ () => this.performQuery(item.value) }>{item.value}</button>
                         ))
                     }
                 </div>

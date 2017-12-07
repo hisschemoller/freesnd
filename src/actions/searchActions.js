@@ -13,14 +13,13 @@ export const REJECT_SOUNDS = 'REJECT_SOUNDS';
 /**
  * Action creators
  */
-export function addToSearchHistory(query) {
-    return { type: ADD_SEARCH_HISTORY, query: query }
+export function addToSearchHistory() {
+    return { type: ADD_SEARCH_HISTORY }
 }
 
 export function setQuery(query) {
     return {
-        type: SET_QUERY,
-        query
+        type: SET_QUERY, query
     };
 }
 

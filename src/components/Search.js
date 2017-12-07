@@ -4,32 +4,20 @@ import { addToSearchHistory, setQuery, fetchSounds } from '../actions/searchActi
 
 class Search extends Component {
     
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: ''
-        };
-        this.handleChange = this.handleChange.bind(this);
-    }
-    
     handleChange = (e) => {
-        this.setState({
-            value: e.target.value
-        });
-        
+        this.props.dispatch(setQuery(e.target.value));
     }
     
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.dispatch(addToSearchHistory(this.state.value));
-        this.props.dispatch(setQuery(this.state.value));
+        this.props.dispatch(addToSearchHistory());
         this.props.dispatch(fetchSounds());
     }
     
     render() {
         return (
             <form className="search" onSubmit={this.handleSubmit}>
-                <input type="text" value={this.state.value} onChange={this.handleChange} />
+                <input type="text" value={this.props.query} onChange={this.handleChange} />
                 <input type="submit" />
             </form>
         );
@@ -37,7 +25,9 @@ class Search extends Component {
 }
 
 function mapStateToProps(state) {
-    return {};
+    return {
+        query: state.searchState.query
+    };
 }
 
 export default connect(mapStateToProps)(Search);
