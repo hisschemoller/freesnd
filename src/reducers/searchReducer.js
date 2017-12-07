@@ -14,10 +14,9 @@ export default function searchReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_SEARCH_HISTORY:
             return Object.assign({}, state, {
-                history: [ ...state.history, {
-                    id: state.count,
+                history: [ {
                     value: action.query
-                }]
+                }, ...state.history ].slice(0, 10)
             });
         case SET_QUERY:
             return Object.assign({}, state, {
