@@ -73,6 +73,10 @@ class Results extends Component {
                             name={result.name} 
                             img={result.images.waveform_m}
                             username={result.username}
+                            rating={result.avg_rating}
+                            downloads={result.num_downloads}
+                            created={result.created}
+                            duration={result.duration}
                             tags={result.tags}
                             previewUrl={result.previews['preview-lq-mp3']}
                             onPreviewButtonDown={this.startPreview}

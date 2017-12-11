@@ -1,12 +1,13 @@
 .listitem {
     color: #ccc;
     display: flex;
+    font-size: 0.6rem;
 }
 .listitem--active {
     color: #999;
 }
 .name {
-    
+    font-size: 1rem;
 }
 .waveform {
     display: none;
@@ -15,11 +16,11 @@
     background: none;
     border: none;
     color: #ccc;
-    font-size: 0.6 rem;
+    font-size: 0.6rem;
     text-decoration: underline;
 }
 .tags {
-    font-size: 0.6 rem;
+    
 }
 .tag {
     background: none;

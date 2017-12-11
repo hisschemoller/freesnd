@@ -9,12 +9,17 @@ class Result extends Component {
             <li className={classNames}>
                 <img src={this.props.img} alt={this.props.name} className={s.waveform}/>
                 <button onMouseDown={() => this.props.onPreviewButtonDown(this.props.previewUrl)} onMouseUp={() => this.props.onPreviewButtonUp()}>p</button>
-                <span className={s.name}>{this.props.name}</span>
-                <button className={s.username} onClick={() => this.props.onUserOrTagClick(this.props.username)}>{this.props.username}</button>
-                <div className={s.tags}>
-                    {this.props.tags.map((tag, i) => (
-                        <button key={tag} className={s.tag} onClick={() => this.props.onUserOrTagClick(tag)}>{tag}</button>
-                    ))}
+                <div>
+                    <div>
+                        <span className={s.name}>{this.props.name}</span>
+                        <button className={s.username} onClick={() => this.props.onUserOrTagClick(this.props.username)}>{this.props.username}</button>
+                        <span>{this.props.duration.toFixed(2)}, {this.props.rating.toFixed(1)}, {this.props.downloads}, {this.props.created}</span>
+                    </div>
+                    <div className={s.tags}>
+                        {this.props.tags.map((tag, i) => (
+                            <button key={tag} className={s.tag} onClick={() => this.props.onUserOrTagClick(tag)}>{tag}</button>
+                        ))}
+                    </div>
                 </div>
             </li>);
     }

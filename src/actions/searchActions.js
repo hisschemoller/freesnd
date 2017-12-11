@@ -62,7 +62,7 @@ export function rejectSounds(error) {
 export function fetchSounds() {
     const url = 'https://freesound.org/apiv2/search/text/',
         token = '97fXJpalkrThSLwam15I5FZBSqYOHvk3DUbwCj65',
-        fields = 'id,name,description,previews,images,username,tags';
+        fields = 'id,name,description,previews,images,username,created,duration,num_downloads,avg_rating,tags';
     return function(dispatch, getState) {
         const query = getState().searchState.query,
             sort = getState().searchState.sort,
