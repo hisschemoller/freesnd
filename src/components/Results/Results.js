@@ -15,15 +15,15 @@ class Results extends Component {
         document.removeEventListener('keyup', this.onDocumentKeyup);
     }
     
-    componentWillUpdate(nextProps, nextState) {
-        // if selected sound changes then play its preview 
-        const hasResults = nextProps.results && nextProps.results.length > 0;
-        const hasChangedIndex = nextProps.selectedIndex !== this.props.selectedIndex && nextProps.selectedIndex !== null;
-        if (hasResults && hasChangedIndex) {
-            const previewUrl = nextProps.results[nextProps.selectedIndex].previews['preview-lq-mp3'];
-            this.props.dispatch(startPreview(previewUrl));
-        }
-    }
+    // componentWillUpdate(nextProps, nextState) {
+    //     // if selected sound changes then play its preview 
+    //     const hasResults = nextProps.results && nextProps.results.length > 0;
+    //     const hasChangedIndex = nextProps.selectedIndex !== this.props.selectedIndex && nextProps.selectedIndex !== null;
+    //     if (hasResults && hasChangedIndex) {
+    //         const previewUrl = nextProps.results[nextProps.selectedIndex].previews['preview-lq-mp3'];
+    //         this.props.dispatch(startPreview(previewUrl));
+    //     }
+    // }
         
     onDocumentKeyup = (e) => {
         switch (e.keyCode) {
