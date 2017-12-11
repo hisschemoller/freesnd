@@ -1,7 +1,8 @@
-import { ADD_SEARCH_HISTORY, RECEIVE_SOUNDS, SET_QUERY, GOTO_PAGE, NEXT_SOUND, PREVIOUS_SOUND } from '../actions/searchActions';
+import { ADD_SEARCH_HISTORY, RECEIVE_SOUNDS, SET_QUERY, SET_SORT, GOTO_PAGE, NEXT_SOUND, PREVIOUS_SOUND } from '../actions/searchActions';
 
 const initialState = {
     query: '',
+    sort: 'score',
     page: 0,
     pageSize: 15,
     count: 0,
@@ -21,6 +22,11 @@ export default function searchReducer(state = initialState, action) {
         case SET_QUERY:
             return Object.assign({}, state, {
                 query: action.query,
+                page: 1
+            });
+        case SET_SORT:
+            return Object.assign({}, state, {
+                sort: action.sort,
                 page: 1
             });
         case GOTO_PAGE:

@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToSearchHistory, setQuery, fetchSounds } from '../actions/searchActions';
+import { addToSearchHistory, setQuery, setSort, fetchSounds } from '../actions/searchActions';
 
 class Search extends Component {
     
-    handleChange = (e) => {
+    handleQueryChange = (e) => {
         this.props.dispatch(setQuery(e.target.value));
+    }
+    
+    handleSortChange = (e) => {
+        this.props.dispatch(setSort(e.target.value));
     }
     
     handleSubmit = (e) => {
@@ -17,7 +21,17 @@ class Search extends Component {
     render() {
         return (
             <form className="search" onSubmit={this.handleSubmit}>
-                <input type="text" value={this.props.query} onChange={this.handleChange} />
+                <input type="text" value={this.props.query} onChange={this.handleQueryChange} />
+                <select value={this.props.sort} onChange={this.handleSortChange}>
+                    <option value="score">Relevance</option>
+                    <option value="duration_desc">Duration, longest first</option>
+                    <option value="duration_asc">Duration, shortest first</option>
+                    <option value="created_desc">Date, newest first</option>
+                    <option value="downloads_desc">Downloads, most downloads first</option>
+                    <option value="downloads_asc">Downloads, least first</option>
+                    <option value="rating_desc">Ratings, highest first</option>
+                    <option value="rating_asc">Ratings, lowest first</option>
+                </select>
                 <input type="submit" />
             </form>
         );
@@ -26,7 +40,8 @@ class Search extends Component {
 
 function mapStateToProps(state) {
     return {
-        query: state.searchState.query
+        query: state.searchState.query,
+        sort: state.searchState.sort
     };
 }
 
