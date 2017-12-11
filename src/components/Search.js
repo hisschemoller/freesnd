@@ -14,6 +14,7 @@ class Search extends Component {
     
     handleSubmit = (e) => {
         e.preventDefault();
+        e.target.querySelector('input[type=text]').blur();
         this.props.dispatch(addToSearchHistory());
         this.props.dispatch(fetchSounds());
     }
