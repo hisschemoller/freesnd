@@ -34,6 +34,7 @@ class Results extends Component {
                 break;
             case 38: // up arrow
                 this.props.dispatch(previousSound());
+                this.props.dispatch(startPreview());
                 break;
             case 39: // right arrow, go to next page
                 this.props.dispatch(gotoPage(this.props.page + 1));
@@ -42,6 +43,10 @@ class Results extends Component {
                 break;
             case 40: // down arrow
                 this.props.dispatch(nextSound());
+                this.props.dispatch(startPreview());
+                break;
+            case 13: // enter
+                this.props.dispatch(startPreview());
                 break;
             default:
                 break;
