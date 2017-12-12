@@ -8,6 +8,7 @@ class WebAudio extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isPlaying: false,
             previewBufferSource: null
         };
     }
@@ -49,21 +50,29 @@ class WebAudio extends Component {
         
         this.stopPreview();
         
+        this.setState(Object.assign({}, this.state, {
+            isPlaying: true
+        }));
+        
         if (this.props.previewURL) {
             fetch(this.props.previewURL)
                 .then(function(response) {
                     response.arrayBuffer().then(function(buffer) {
                         ctx.decodeAudioData(buffer).then(function(decodedBuffer) {
-                            const source = ctx.createBufferSource();
-                            source.buffer = decodedBuffer;
-                            source.onended = () => {
-                                self.stopPreview();
-                            };
-                            source.connect(ctx.destination);
-                            source.start();
-                            const newState = Object.assign({}, self.state);
-                            newState.previewBufferSource = source;
-                            self.setState(newState);
+                            if (self.state.isPlaying) {
+                                // create and play the buffer
+                                const source = ctx.createBufferSource();
+                                source.buffer = decodedBuffer;
+                                source.onended = () => {
+                                    self.stopPreview();
+                                };
+                                source.connect(ctx.destination);
+                                source.start();
+                                // store in local state
+                                self.setState(Object.assign({}, self.state, {
+                                    previewBufferSource: source
+                                }));
+                            }
                         })
                     });
                 })
@@ -76,10 +85,11 @@ class WebAudio extends Component {
     stopPreview = () => {
         if (this.state.previewBufferSource) {
             this.state.previewBufferSource.stop();
-            const newState = Object.assign({}, this.state);
-            newState.preview = null;
-            this.setState(newState);
         }
+        this.setState(Object.assign({}, this.state, {
+            isPlaying: false,
+            previewBufferSource: null
+        }));
     }
   
     render() {

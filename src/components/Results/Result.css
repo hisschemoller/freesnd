@@ -6,11 +6,20 @@
 .listitem--active {
     color: #999;
 }
+.waveform {
+    background-color: #eee;
+    height: 30px;
+    position: relative;
+    width: 70px;
+}
+.waveform img {
+    display: none;
+}
+.info {
+    display: none;
+}
 .name {
     font-size: 1rem;
-}
-.waveform {
-    display: none;
 }
 .username {
     background: none;

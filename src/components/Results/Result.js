@@ -7,9 +7,11 @@ class Result extends Component {
         const classNames = `${s.listitem} ${this.props.active ? s['listitem--active'] : ''}`;
         return (
             <li className={classNames}>
-                <img src={this.props.img} alt={this.props.name} className={s.waveform}/>
+                <div className={s.waveform}>
+                    <img src={this.props.img} alt={this.props.name} />
+                </div>
                 <button onMouseDown={() => this.props.onPreviewButtonDown(this.props.index)} onMouseUp={() => this.props.onPreviewButtonUp()}>p</button>
-                <div>
+                <div className={s.info}>
                     <div>
                         <span className={s.name}>{this.props.name}</span>
                         <button className={s.username} onClick={() => this.props.onUserOrTagClick(this.props.username)}>{this.props.username}</button>
