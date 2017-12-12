@@ -8,7 +8,7 @@ class WebAudio extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isPlaying: false,
+            isStarted: false,
             previewBufferSource: null
         };
     }
@@ -51,7 +51,7 @@ class WebAudio extends Component {
         this.stopPreview();
         
         this.setState(Object.assign({}, this.state, {
-            isPlaying: true
+            isStarted: true
         }));
         
         if (this.props.previewURL) {
@@ -59,7 +59,7 @@ class WebAudio extends Component {
                 .then(function(response) {
                     response.arrayBuffer().then(function(buffer) {
                         ctx.decodeAudioData(buffer).then(function(decodedBuffer) {
-                            if (self.state.isPlaying) {
+                            if (self.state.isStarted) {
                                 // create and play the buffer
                                 const source = ctx.createBufferSource();
                                 source.buffer = decodedBuffer;
@@ -87,7 +87,7 @@ class WebAudio extends Component {
             this.state.previewBufferSource.stop();
         }
         this.setState(Object.assign({}, this.state, {
-            isPlaying: false,
+            isStarted: false,
             previewBufferSource: null
         }));
     }

@@ -48,6 +48,9 @@ class Results extends Component {
             case 13: // enter
                 this.props.dispatch(startPreview());
                 break;
+            case 8: // backspace
+                this.props.dispatch(stopPreview());
+                break;
             default:
                 break;
         }
