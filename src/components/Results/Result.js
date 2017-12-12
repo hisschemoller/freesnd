@@ -8,7 +8,7 @@ class Result extends Component {
         return (
             <li className={classNames}>
                 <img src={this.props.img} alt={this.props.name} className={s.waveform}/>
-                <button onMouseDown={() => this.props.onPreviewButtonDown(this.props.previewUrl)} onMouseUp={() => this.props.onPreviewButtonUp()}>p</button>
+                <button onMouseDown={() => this.props.onPreviewButtonDown(this.props.index)} onMouseUp={() => this.props.onPreviewButtonUp()}>p</button>
                 <div>
                     <div>
                         <span className={s.name}>{this.props.name}</span>

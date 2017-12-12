@@ -8,8 +8,8 @@ export const CLEAR_EVENT_QUEUE = 'CLEAR_EVENT_QUEUE';
 /**
  * Action creators
  */
-export function startPreview(src) {
-    return { type: START_PREVIEW, src };
+export function startPreview() {
+    return { type: START_PREVIEW };
 }
 
 export function stopPreview() {

@@ -1,9 +1,9 @@
 
-export const getPreviewURL = state => {
-    const hasResults = state.results && state.results.length > 0;
-    const hasPreview = state.selectedIndex !== null && state.results[state.selectedIndex];
-    const previewURL = hasPreview ? state.results[state.selectedIndex].previews['preview-lq-mp3'] : null;
-    return Object.assign({}, state, {
-        previewURL: previewURL
-    };
-});
+export const selectPreviewURL = state => {
+    const results = state.searchState.results;
+    const index = state.searchState.selectedIndex;
+    const hasResults = results && results.length > 0;
+    const hasPreview = hasResults && index !== null && results[index];
+    const previewURL = hasPreview ? results[index].previews['preview-lq-mp3'] : null;
+    return previewURL;
+};

@@ -5,6 +5,7 @@ export const ADD_SEARCH_HISTORY = 'ADD_SEARCH_HISTORY';
 export const SET_QUERY = 'SET_QUERY';
 export const SET_SORT = 'SET_SORT';
 export const GOTO_PAGE = 'GOTO_PAGE';
+export const SELECT_SOUND = 'SELECT_SOUND';
 export const NEXT_SOUND = 'NEXT_SOUND';
 export const PREVIOUS_SOUND = 'PREVIOUS_SOUND';
 export const REQUEST_SOUNDS = 'REQUEST_SOUNDS';
@@ -28,6 +29,10 @@ export function setSort(sort) {
 
 export function gotoPage(page) {
     return { type: GOTO_PAGE, page };
+}
+
+export function selectSound(index) {
+    return { type: SELECT_SOUND, index };
 }
 
 export function nextSound() {

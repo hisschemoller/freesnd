@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { startPreview, stopPreview } from '../../actions/audioActions';
-import { addToSearchHistory, setQuery, gotoPage, nextSound, previousSound, fetchSounds } from '../../actions/searchActions';
+import { addToSearchHistory, setQuery, gotoPage, selectSound, nextSound, previousSound, fetchSounds } from '../../actions/searchActions';
 import Result from './Result';
 import s from './Results.css';
 
@@ -48,8 +48,9 @@ class Results extends Component {
         }
     }
     
-    startPreview = (previewUrl) => {
-        this.props.dispatch(startPreview(previewUrl));
+    startPreview = (index) => {
+        this.props.dispatch(selectSound(index));
+        this.props.dispatch(startPreview());
     }
     
     stopPreview = () => {
@@ -70,6 +71,7 @@ class Results extends Component {
                     {this.props.results.map((result, i) => (
                         <Result 
                             key={result.id} 
+                            index={i}
                             name={result.name} 
                             img={result.images.waveform_m}
                             username={result.username}
