@@ -1,10 +1,12 @@
 .listitem {
     color: #ccc;
-    display: flex;
     font-size: 0.6rem;
 }
 .listitem--active {
     color: #999;
+}
+.row {
+    display: flex;
 }
 .waveform {
     background-color: #eee;
