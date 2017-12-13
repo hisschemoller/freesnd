@@ -40,7 +40,7 @@ class Result extends Component {
                     </div>
                     <button type="button" onClick={this.toggleDetail}>d</button>
                 </div>
-                { this.state.showDetails ? <ResultDetail /> : null }
+                { this.state.showDetails ? <ResultDetail soundID={this.props.soundID} /> : null }
             </li>);
     }
 }

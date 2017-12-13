@@ -1,4 +1,4 @@
-import { ADD_SEARCH_HISTORY, RECEIVE_SOUNDS, SET_QUERY, SET_SORT, GOTO_PAGE, SELECT_SOUND, NEXT_SOUND, PREVIOUS_SOUND } from '../actions/searchActions';
+import { ADD_SEARCH_HISTORY, RECEIVE_SOUNDS, RECEIVE_SOUND, SET_QUERY, SET_SORT, GOTO_PAGE, SELECT_SOUND, NEXT_SOUND, PREVIOUS_SOUND } from '../actions/searchActions';
 
 const initialState = {
     query: '',
@@ -8,7 +8,8 @@ const initialState = {
     count: 0,
     history: [],
     results: [],
-    selectedIndex: null
+    selectedIndex: null,
+    sounds: {}
 };
 
 export default function searchReducer(state = initialState, action) {
@@ -53,6 +54,10 @@ export default function searchReducer(state = initialState, action) {
                 results: action.sounds.results,
                 selectedIndex: null
             });
+        case RECEIVE_SOUND:
+            const newState = Object.assign({}, state);
+            newState.sounds[action.soundID] = action.sound;
+            return newState;
         default:
             return state;
     }

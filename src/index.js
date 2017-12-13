@@ -9,7 +9,6 @@ import './index.css';
 import App from './components/App';
 import audioReducer from './reducers/audioReducer';
 import searchReducer from './reducers/searchReducer';
-// import { fetchSounds } from './actions/searchActions'; 
 
 const reducer = combineReducers({
     audioState: audioReducer,
@@ -20,10 +19,15 @@ const loggerMiddleware = createLogger({
     collapsed: true
 });
 
+const api = {
+    url: 'https://freesound.org/apiv2/',
+    token: '97fXJpalkrThSLwam15I5FZBSqYOHvk3DUbwCj65'
+}
+
 const store = createStore(
     reducer,
     applyMiddleware(
-        thunkMiddleware,
+        thunkMiddleware.withExtraArgument(api),
         loggerMiddleware
     ));
 
@@ -35,7 +39,3 @@ ReactDOM.render(
 );
 
 registerServiceWorker();
-
-// store
-//   .dispatch(fetchSounds('wouter'))
-//   .then(() => console.log(store.getState()));

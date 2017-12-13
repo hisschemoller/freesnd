@@ -11,6 +11,9 @@ export const PREVIOUS_SOUND = 'PREVIOUS_SOUND';
 export const REQUEST_SOUNDS = 'REQUEST_SOUNDS';
 export const RECEIVE_SOUNDS = 'RECEIVE_SOUNDS';
 export const REJECT_SOUNDS = 'REJECT_SOUNDS';
+export const REQUEST_SOUND = 'REQUEST_SOUND';
+export const RECEIVE_SOUND = 'RECEIVE_SOUND';
+export const REJECT_SOUND = 'REJECT_SOUND';
 
 /**
  * Action creators
@@ -51,7 +54,6 @@ export function receiveSounds(query, json) {
     return {
         type: RECEIVE_SOUNDS,
         query,
-        // sounds: json.data.children.map(child => child.data),
         sounds: json,
         receivedAt: Date.now()
     };
@@ -64,17 +66,35 @@ export function rejectSounds(error) {
     };
 }
 
+export function requestSound(soundID) {
+    return { type: REQUEST_SOUND, soundID };
+}
+
+export function receiveSound(soundID, json) {
+    return {
+        type: RECEIVE_SOUND,
+        soundID,
+        sound: json,
+        receivedAt: Date.now()
+    };
+}
+
+export function rejectSound(error) {
+    return {
+        type: REJECT_SOUND,
+        error: error
+    };
+}
+
 export function fetchSounds() {
-    const url = 'https://freesound.org/apiv2/search/text/',
-        token = '97fXJpalkrThSLwam15I5FZBSqYOHvk3DUbwCj65',
-        fields = 'id,name,description,previews,images,username,created,duration,num_downloads,avg_rating,tags';
-    return function(dispatch, getState) {
+    return function(dispatch, getState, api) {
         const query = getState().searchState.query,
             sort = getState().searchState.sort,
             page = getState().searchState.page,
-            pageSize = getState().searchState.pageSize;
+            pageSize = getState().searchState.pageSize,
+            fields = 'id,name,description,previews,images,username,created,duration,num_downloads,avg_rating,tags';
         dispatch(requestSounds(query));
-        return fetch(`${url}?format=json&query=${query}&sort=${sort}&page=${page}&page_size=${pageSize}&fields=${fields}&token=${token}`)
+        return fetch(`${api.url}search/text/?format=json&query=${query}&sort=${sort}&page=${page}&page_size=${pageSize}&fields=${fields}&token=${api.token}`)
             .then(
                 response => response.json(),
                 error => dispatch(rejectSounds(error))
@@ -82,6 +102,21 @@ export function fetchSounds() {
             .then(
                 json => dispatch(receiveSounds(query, json)),
                 error => dispatch(rejectSounds(error))
+            )
+    }
+}
+
+export function fetchSound(soundID) {
+    return function(dispatch, getState, api) {
+        dispatch(requestSound(soundID));
+        return fetch(`${api.url}sounds/${soundID}/?token=${api.token}`)
+            .then(
+                response => response.json(),
+                error => dispatch(rejectSound(error))
+            )
+            .then(
+                json => dispatch(receiveSound(soundID, json)),
+                error => dispatch(rejectSound(error))
             )
     }
 }

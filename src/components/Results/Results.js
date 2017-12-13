@@ -79,6 +79,7 @@ class Results extends Component {
                     {this.props.results.map((result, i) => (
                         <Result 
                             key={result.id} 
+                            soundID={result.id} 
                             index={i}
                             name={result.name} 
                             img={result.images.waveform_m}
