@@ -107,15 +107,21 @@ export function fetchSounds() {
 
 export function fetchSound(id) {
     return function(dispatch, getState, api) {
-        dispatch(requestSound(id));
-        return fetch(`${api.url}sounds/${id}/?token=${api.token}`)
-            .then(
-                response => response.json(),
-                error => dispatch(rejectSound(error))
-            )
-            .then(
-                json => dispatch(receiveSound(id, json)),
-                error => dispatch(rejectSound(error))
-            )
+        // check if data already exists
+        if (!getState().searchState.results.filter(sound => sound.id === id)[0].channels) {
+            dispatch(requestSound(id));
+            return fetch(`${api.url}sounds/${id}/?token=${api.token}`)
+                .then(
+                    response => response.json(),
+                    error => dispatch(rejectSound(error))
+                )
+                .then(
+                    json => dispatch(receiveSound(id, json)),
+                    error => dispatch(rejectSound(error))
+                )
+        } else {
+            console.log('exists');
+            return Promise.resolve();
+        }
     }
 }
