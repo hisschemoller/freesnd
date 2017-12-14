@@ -14,11 +14,11 @@ const initialState = {
 export default function searchReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_SEARCH_HISTORY:
-            return Object.assign({}, state, {
-                history: [ {
-                    value: state.query
-                }, ...state.history ].slice(0, 10)
-            });
+            const newState = Object.assign({}, state);
+            if (state.history.length === 0 || state.query !== state.history[0].value) {
+                newState.history = [{ value: state.query }, ...state.history ].slice(0, 10);
+            }
+            return newState;
         case SET_QUERY:
             return Object.assign({}, state, {
                 query: action.query,
