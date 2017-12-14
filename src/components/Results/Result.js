@@ -12,7 +12,9 @@ class Result extends Component {
     }
     
     toggleDetail = (e) => {
-        this.props.onDetailButtonClick(this.props.id);
+        if (!this.state.showDetails) {
+            this.props.onDetailButtonClick(this.props.id);
+        }
         this.setState({
             showDetails: !this.state.showDetails
         });
