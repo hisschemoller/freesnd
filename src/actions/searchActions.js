@@ -73,7 +73,6 @@ export function requestSound(soundID) {
 export function receiveSound(soundID, json) {
     return {
         type: RECEIVE_SOUND,
-        soundID,
         sound: json,
         receivedAt: Date.now()
     };
@@ -92,7 +91,7 @@ export function fetchSounds() {
             sort = getState().searchState.sort,
             page = getState().searchState.page,
             pageSize = getState().searchState.pageSize,
-            fields = 'id,name,description,previews,images,username,created,duration,num_downloads,avg_rating,tags';
+            fields = 'id,name,previews,images,username,created,duration,num_downloads,avg_rating,tags';
         dispatch(requestSounds(query));
         return fetch(`${api.url}search/text/?format=json&query=${query}&sort=${sort}&page=${page}&page_size=${pageSize}&fields=${fields}&token=${api.token}`)
             .then(
@@ -106,16 +105,16 @@ export function fetchSounds() {
     }
 }
 
-export function fetchSound(soundID) {
+export function fetchSound(id) {
     return function(dispatch, getState, api) {
-        dispatch(requestSound(soundID));
-        return fetch(`${api.url}sounds/${soundID}/?token=${api.token}`)
+        dispatch(requestSound(id));
+        return fetch(`${api.url}sounds/${id}/?token=${api.token}`)
             .then(
                 response => response.json(),
                 error => dispatch(rejectSound(error))
             )
             .then(
-                json => dispatch(receiveSound(soundID, json)),
+                json => dispatch(receiveSound(id, json)),
                 error => dispatch(rejectSound(error))
             )
     }

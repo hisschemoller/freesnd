@@ -12,6 +12,7 @@ class Result extends Component {
     }
     
     toggleDetail = (e) => {
+        this.props.onDetailButtonClick(this.props.id);
         this.setState({
             showDetails: !this.state.showDetails
         });
@@ -41,7 +42,9 @@ class Result extends Component {
                     <button type="button" onClick={this.toggleDetail}>d</button>
                     <button type="button">f</button>
                 </div>
-                { this.state.showDetails ? <ResultDetail soundID={this.props.id} /> : null }
+                { this.state.showDetails ? <ResultDetail description={this.props.description} /> : null }
             </li>);
     }
 }
+
+export default Result;

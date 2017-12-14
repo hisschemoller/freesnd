@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { startPreview, stopPreview } from '../../actions/audioActions';
-import { addToSearchHistory, setQuery, gotoPage, selectSound, nextSound, previousSound, fetchSounds } from '../../actions/searchActions';
+import { addToSearchHistory, setQuery, gotoPage, selectSound, nextSound, previousSound, fetchSounds, fetchSound } from '../../actions/searchActions';
 import Result from './Result';
 import s from './Results.css';
 
@@ -61,6 +61,10 @@ class Results extends Component {
         this.props.dispatch(fetchSounds());
     }
     
+    fetchSoundDetails = (id) => {
+        this.props.dispatch(fetchSound(id));
+    }
+    
     render() {
         return (
             <div className={s.root}>
@@ -73,6 +77,7 @@ class Results extends Component {
                             onPreviewButtonDown={this.startPreview}
                             onPreviewButtonUp={this.stopPreview}
                             onUserOrTagClick={this.performQuery}
+                            onDetailButtonClick={this.fetchSoundDetails}
                             active={i === this.props.selectedIndex} />
                     ))}
                 </ul>

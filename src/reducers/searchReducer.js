@@ -8,8 +8,7 @@ const initialState = {
     count: 0,
     history: [],
     results: [],
-    selectedIndex: null,
-    sounds: {}
+    selectedIndex: null
 };
 
 export default function searchReducer(state = initialState, action) {
@@ -55,9 +54,14 @@ export default function searchReducer(state = initialState, action) {
                 selectedIndex: null
             });
         case RECEIVE_SOUND:
-            const newState = Object.assign({}, state);
-            newState.sounds[action.soundID] = action.sound;
-            return newState;
+            return Object.assign({}, state, {
+                results: state.results.map(sound => sound.id === action.sound.id ? action.sound : sound)
+            });
+            
+            
+            // const newState = Object.assign({}, state);
+            // newState.sounds[action.soundID] = action.sound;
+            // return newState;
         default:
             return state;
     }
