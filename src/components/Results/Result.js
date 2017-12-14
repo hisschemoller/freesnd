@@ -44,7 +44,7 @@ class Result extends Component {
                     <button type="button" onClick={this.toggleDetail}>d</button>
                     <button type="button">f</button>
                 </div>
-                { this.state.showDetails ? <ResultDetail description={this.props.description} /> : null }
+                { this.state.showDetails ? <ResultDetail {...this.props} /> : null }
             </li>);
     }
 }
