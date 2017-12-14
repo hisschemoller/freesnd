@@ -30,7 +30,7 @@ class Result extends Component {
                         <div>
                             <span className={s.name}>{this.props.name}</span>
                             <button className={s.username} onClick={() => this.props.onUserOrTagClick(this.props.username)}>{this.props.username}</button>
-                            <span>{this.props.duration.toFixed(2)}, {this.props.rating.toFixed(1)}, {this.props.downloads}, {this.props.created}</span>
+                            <span>{this.props.duration.toFixed(2)}, {this.props.avg_rating.toFixed(1)}, {this.props.downloads}, {this.props.created}</span>
                         </div>
                         <div className={s.tags}>
                             {this.props.tags.map((tag, i) => (
@@ -39,10 +39,9 @@ class Result extends Component {
                         </div>
                     </div>
                     <button type="button" onClick={this.toggleDetail}>d</button>
+                    <button type="button">f</button>
                 </div>
-                { this.state.showDetails ? <ResultDetail soundID={this.props.soundID} /> : null }
+                { this.state.showDetails ? <ResultDetail soundID={this.props.id} /> : null }
             </li>);
     }
 }
-
-export default Result;
