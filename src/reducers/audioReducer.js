@@ -1,6 +1,4 @@
-import { START_PREVIEW, 
-    STOP_PREVIEW, 
-    CLEAR_EVENT_QUEUE } from '../actions/audioActions';
+import { START_PREVIEW, STOP_PREVIEW, CLEAR_EVENT_QUEUE } from '../actions/audioActions';
 
 const initialState = {
     events: []

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { startPreview, stopPreview } from '../../actions/audioActions';
+import { addToFavourites } from '../../actions/favsActions';
 import { addToSearchHistory, setQuery, gotoPage, selectSound, nextSound, previousSound, fetchSounds, fetchSound } from '../../actions/searchActions';
 import Result from './Result';
 import s from './Results.css';
@@ -65,6 +66,10 @@ class Results extends Component {
         this.props.dispatch(fetchSound(id));
     }
     
+    addToFavourites = (id) => {
+        this.props.dispatch(addToFavourites(id));
+    }
+    
     render() {
         return (
             <div className={s.root}>
@@ -78,6 +83,7 @@ class Results extends Component {
                             onPreviewButtonUp={this.stopPreview}
                             onUserOrTagClick={this.performQuery}
                             onDetailButtonClick={this.fetchSoundDetails}
+                            onFavouritesButtonClick={this.addToFavourites}
                             active={i === this.props.selectedIndex} />
                     ))}
                 </ul>

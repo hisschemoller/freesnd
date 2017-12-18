@@ -42,7 +42,7 @@ class Result extends Component {
                         </div>
                     </div>
                     <button type="button" onClick={this.toggleDetail}>d</button>
-                    <button type="button">f</button>
+                    <button type="button" onClick={() => this.props.onFavouritesButtonClick(this.props.id)}>f</button>
                 </div>
                 { this.state.showDetails ? <ResultDetail {...this.props} /> : null }
             </li>);

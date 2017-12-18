@@ -8,10 +8,12 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import App from './components/App';
 import audioReducer from './reducers/audioReducer';
+import favsReducer from './reducers/favsReducer';
 import searchReducer from './reducers/searchReducer';
 
 const reducer = combineReducers({
     audioState: audioReducer,
+    favsState: favsReducer,
 	searchState: searchReducer
 });
 
