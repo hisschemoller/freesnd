@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Favourite from './Favourite';
 import s from './Favourites.css';
+import { removeFavourite } from '../../actions/favsActions';
 
 class Favourites extends Component {
+    
+    removeFromFavourites = (id) => {
+        this.props.dispatch(removeFavourite(id));
+    }
     
     render() {
         return (
@@ -14,7 +19,8 @@ class Favourites extends Component {
                         <Favourite 
                             {...sound} 
                             key={sound.id} 
-                            active={i === this.props.favIndex} />
+                            active={i === this.props.favIndex} 
+                            onRemoveButtonClick={this.removeFromFavourites}/>
                     ))}
                 </ul>
             </div>

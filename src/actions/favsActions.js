@@ -1,11 +1,13 @@
 
 export const ADD_FAVOURITE = 'ADD_FAVOURITE';
+export const REMOVE_FAVOURITE = 'REMOVE_FAVOURITE';
+
+export function removeFavourite(id) {
+    return { type: REMOVE_FAVOURITE, id };
+}
 
 export function addFavourite(sound) {
-    return {
-        type: ADD_FAVOURITE,
-        sound: sound
-    };
+    return { type: ADD_FAVOURITE, sound };
 }
 
 export function addToFavourites(id) {
