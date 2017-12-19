@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { clearEventQueue, START_PREVIEW, STOP_PREVIEW } from '../actions/audioActions';
+import { clearEventQueue, START_PREVIEW, STOP_PREVIEW, previewStarted, previewStopped } from '../actions/audioActions';
 import { selectPreviewURL } from '../selectors';
 
 class WebAudio extends Component {
@@ -74,7 +74,7 @@ class WebAudio extends Component {
                                     previewBufferSource: source
                                 }));
                                 
-                                // 
+                                self.props.dispatch(previewStarted(startNormalized, decodedBuffer.duration));
                             }
                         })
                     });
@@ -93,6 +93,7 @@ class WebAudio extends Component {
             isStarted: false,
             previewBufferSource: null
         }));
+        this.props.dispatch(previewStopped());
     }
   
     render() {

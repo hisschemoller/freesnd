@@ -48,7 +48,6 @@ class Results extends Component {
     }
     
     startPreview = (index, startNormalized = 0) => {
-        console.log(index, startNormalized);
         this.props.dispatch(selectSound(index));
         this.props.dispatch(startPreview(startNormalized));
     }

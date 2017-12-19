@@ -1,7 +1,9 @@
-import { START_PREVIEW, STOP_PREVIEW, CLEAR_EVENT_QUEUE } from '../actions/audioActions';
+import { START_PREVIEW, STOP_PREVIEW, CLEAR_EVENT_QUEUE, PREVIEW_STARTED, PREVIEW_STOPPED } from '../actions/audioActions';
 
 const initialState = {
-    events: []
+    events: [],
+    isPlaying: false,
+    
 };
 
 export default function reducer(state = initialState, action) {
@@ -23,6 +25,10 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, {
                 events: []
             });
+        case PREVIEW_STARTED:
+            return state;
+        case PREVIEW_STOPPED:
+            return state;
         default:
             return state;
     }
