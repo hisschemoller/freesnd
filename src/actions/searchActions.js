@@ -1,3 +1,20 @@
+
+/**
+ * Action creator generator.
+ * @param  {String} type Action type for which to generate a creator function.
+ * @param  {[type]} argNames [description]
+ * @return {Function} Action creator function.
+ */
+function makeActionCreator(type, ...argNames) {
+    return function (...args) {
+        let action = { type };
+        argNames.forEach((arg, index) => {
+            action[argNames[index]] = args[index]
+        });
+        return action;
+    }
+}
+
 /**
  * Action types
  */
@@ -18,73 +35,23 @@ export const REJECT_SOUND = 'REJECT_SOUND';
 /**
  * Action creators
  */
-export function addToSearchHistory() {
-    return { type: ADD_SEARCH_HISTORY }
-}
+export const addToSearchHistory = makeActionCreator(ADD_SEARCH_HISTORY);
+export const setQuery = makeActionCreator(SET_QUERY, 'query');
+export const setSort = makeActionCreator(SET_SORT, 'sort');
+export const gotoPage = makeActionCreator(GOTO_PAGE, 'page');
+export const selectSound = makeActionCreator(SELECT_SOUND, 'index');
+export const nextSound = makeActionCreator(NEXT_SOUND);
+export const previousSound = makeActionCreator(PREVIOUS_SOUND);
+export const requestSounds = makeActionCreator(REQUEST_SOUNDS, 'query');
+export const receiveSounds = makeActionCreator(RECEIVE_SOUNDS, 'query', 'sounds');
+export const rejectSounds = makeActionCreator(REJECT_SOUNDS, 'error');
+export const requestSound = makeActionCreator(REQUEST_SOUND, 'soundID');
+export const receiveSound = makeActionCreator(RECEIVE_SOUND, 'id', 'sound');
+export const rejectSound = makeActionCreator(REJECT_SOUND, 'error');
 
-export function setQuery(query) {
-    return { type: SET_QUERY, query };
-}
-
-export function setSort(sort) {
-    return { type: SET_SORT, sort };
-}
-
-export function gotoPage(page) {
-    return { type: GOTO_PAGE, page };
-}
-
-export function selectSound(index) {
-    return { type: SELECT_SOUND, index };
-}
-
-export function nextSound() {
-    return { type: NEXT_SOUND };
-}
-
-export function previousSound() {
-    return { type: PREVIOUS_SOUND };
-}
-
-export function requestSounds(query) {
-    return { type: REQUEST_SOUNDS, query };
-}
-
-export function receiveSounds(query, json) {
-    return {
-        type: RECEIVE_SOUNDS,
-        query,
-        sounds: json,
-        receivedAt: Date.now()
-    };
-}
-
-export function rejectSounds(error) {
-    return {
-        type: REJECT_SOUNDS,
-        error: error
-    };
-}
-
-export function requestSound(soundID) {
-    return { type: REQUEST_SOUND, soundID };
-}
-
-export function receiveSound(soundID, json) {
-    return {
-        type: RECEIVE_SOUND,
-        sound: json,
-        receivedAt: Date.now()
-    };
-}
-
-export function rejectSound(error) {
-    return {
-        type: REJECT_SOUND,
-        error: error
-    };
-}
-
+/**
+ * Async actions
+ */
 export function fetchSounds() {
     return function(dispatch, getState, api) {
         const query = getState().searchState.query,
