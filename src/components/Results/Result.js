@@ -19,13 +19,52 @@ class Result extends Component {
             showDetails: !this.state.showDetails
         });
     }
+    
+    onPreviewAreaMouseDown = (e) => {
+        const localMouseXNormalized = (e.pageX - this.getPosition(e.target).x) / e.target.offsetWidth;
+        this.props.onPreviewAreaMouseDown(this.props.index, localMouseXNormalized);
+    }
+    
+    /**
+     * Get mouse position relative to DOM element.
+     * @see https://www.kirupa.com/html5/get_element_position_using_javascript.htm
+     * @param  {Object} el DOM element.
+     * @return {Object} x, y coordinate object.
+     */
+    getPosition = (el) => {
+        let xPos = 0, yPos = 0;
+
+        while (el) {
+            if (el.tagName === 'BODY') {
+                // deal with browser quirks with body/window/document and page scroll
+                const xScroll = el.scrollLeft || document.documentElement.scrollLeft;
+                const yScroll = el.scrollTop || document.documentElement.scrollTop;
+                xPos += (el.offsetLeft - xScroll + el.clientLeft);
+                yPos += (el.offsetTop - yScroll + el.clientTop);
+            } else {
+                // for all other non-BODY elements
+                xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+                yPos += (el.offsetTop - el.scrollTop + el.clientTop);
+            }
+
+            el = el.offsetParent;
+        }
+        
+        return {
+            x: xPos,
+            y: yPos
+        };
+    }
 
     render() {
         const classNames = `${s.listitem} ${this.props.active ? s['listitem--active'] : ''}`;
         return (
             <li className={classNames}>
                 <div className={s.row}>
-                    <div className={s.waveform}>
+                    <div 
+                        className={s.waveform} 
+                        onMouseDown={(e) => this.onPreviewAreaMouseDown(e)}
+                        onMouseUp={() => this.props.onPreviewAreaMouseUp()}>
                         <img src={this.props.img} alt={this.props.name} />
                     </div>
                     <button onMouseDown={() => this.props.onPreviewButtonDown(this.props.index)} onMouseUp={() => this.props.onPreviewButtonUp()}>p</button>

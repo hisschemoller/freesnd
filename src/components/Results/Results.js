@@ -47,9 +47,10 @@ class Results extends Component {
         }
     }
     
-    startPreview = (index) => {
+    startPreview = (index, startNormalized = 0) => {
+        console.log(index, startNormalized);
         this.props.dispatch(selectSound(index));
-        this.props.dispatch(startPreview());
+        this.props.dispatch(startPreview(startNormalized));
     }
     
     stopPreview = () => {
@@ -79,12 +80,15 @@ class Results extends Component {
                         <Result 
                             {...result}
                             key={result.id} 
+                            index={i}
+                            active={i === this.props.selectedIndex} 
                             onPreviewButtonDown={this.startPreview}
                             onPreviewButtonUp={this.stopPreview}
                             onUserOrTagClick={this.performQuery}
                             onDetailButtonClick={this.fetchSoundDetails}
                             onFavouritesButtonClick={this.addToFavourites}
-                            active={i === this.props.selectedIndex} />
+                            onPreviewAreaMouseDown={this.startPreview}
+                            onPreviewAreaMouseUp={this.stopPreview} />
                     ))}
                 </ul>
             </div>

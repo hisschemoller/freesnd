@@ -34,7 +34,7 @@ class WebAudio extends Component {
     processEvent(event) {
         switch(event.type) {
             case START_PREVIEW:
-                this.startPreview();
+                this.startPreview(event.startNormalized);
                 break;
             case STOP_PREVIEW:
                 this.stopPreview();
@@ -44,7 +44,7 @@ class WebAudio extends Component {
         }
     }
     
-    startPreview = () => {
+    startPreview = (startNormalized) => {
         const ctx = this.ctx,
             self = this;
         
@@ -67,11 +67,14 @@ class WebAudio extends Component {
                                     self.stopPreview();
                                 };
                                 source.connect(ctx.destination);
-                                source.start();
-                                // store in local state
+                                source.start(startNormalized * decodedBuffer.duration);
+                                
+                                // store bufferSource in local state
                                 self.setState(Object.assign({}, self.state, {
                                     previewBufferSource: source
                                 }));
+                                
+                                // 
                             }
                         })
                     });
