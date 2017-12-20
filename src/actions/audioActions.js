@@ -10,8 +10,8 @@ export const PREVIEW_STOPPED = 'PREVIEW_STOPPED';
 /**
  * Action creators
  */
-export function startPreview(startNormalized) {
-    return { type: START_PREVIEW, startNormalized };
+export function startPreview(soundID, soundPreviewURL, startNormalized) {
+    return { type: START_PREVIEW, soundID, soundPreviewURL, startNormalized };
 }
 
 export function stopPreview() {
@@ -22,10 +22,10 @@ export function clearEventQueue() {
    return { type: CLEAR_EVENT_QUEUE };
 }
 
-export function previewStarted(startNormalized, duration) {
-   return { type: PREVIEW_STARTED, startNormalized, duration };
+export function previewStarted(soundID, positionNormalized, duration) {
+   return { type: PREVIEW_STARTED, soundID, positionNormalized, duration };
 }
 
-export function previewStopped() {
-   return { type: PREVIEW_STOPPED };
+export function previewStopped(soundID) {
+   return { type: PREVIEW_STOPPED, soundID };
 }

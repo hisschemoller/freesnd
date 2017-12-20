@@ -14,6 +14,12 @@
     position: relative;
     width: 100px;
 }
+.locator {
+    background-color: #666;
+    height: 100%;
+    position: absolute;
+    width: 1px;
+}
 .waveform img {
     display: none;
 }

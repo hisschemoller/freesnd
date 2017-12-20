@@ -3,7 +3,9 @@ import { START_PREVIEW, STOP_PREVIEW, CLEAR_EVENT_QUEUE, PREVIEW_STARTED, PREVIE
 const initialState = {
     events: [],
     isPlaying: false,
-    
+    soundID: null,
+    positionNormalized: 0,
+    duration: 1
 };
 
 export default function reducer(state = initialState, action) {
@@ -12,6 +14,8 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, {
                 events: [ ...state.events, {
                     type: action.type,
+                    soundID: action.soundID,
+                    soundPreviewURL: action.soundPreviewURL,
                     startNormalized: action.startNormalized
                 }]
             });
@@ -26,9 +30,17 @@ export default function reducer(state = initialState, action) {
                 events: []
             });
         case PREVIEW_STARTED:
-            return state;
+            return Object.assign({}, state, {
+                isPlaying: true,
+                soundID: action.soundID || state.soundID,
+                positionNormalized: action.positionNormalized,
+                duration: action.duration
+            });
         case PREVIEW_STOPPED:
-            return state;
+            return Object.assign({}, state, {
+                isPlaying: false,
+                soundID: action.soundID || state.soundID
+            });
         default:
             return state;
     }

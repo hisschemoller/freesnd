@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { clearEventQueue, START_PREVIEW, STOP_PREVIEW, previewStarted, previewStopped } from '../actions/audioActions';
-import { selectPreviewURL } from '../selectors';
 
 class WebAudio extends Component {
     
@@ -9,6 +8,7 @@ class WebAudio extends Component {
         super(props);
         this.state = {
             isStarted: false,
+            soundID: null,
             previewBufferSource: null
         };
     }
@@ -34,7 +34,7 @@ class WebAudio extends Component {
     processEvent(event) {
         switch(event.type) {
             case START_PREVIEW:
-                this.startPreview(event.startNormalized);
+                this.startPreview(event.soundID, event.soundPreviewURL, event.startNormalized);
                 break;
             case STOP_PREVIEW:
                 this.stopPreview();
@@ -44,18 +44,19 @@ class WebAudio extends Component {
         }
     }
     
-    startPreview = (startNormalized) => {
+    startPreview = (soundID, soundPreviewURL, startNormalized) => {
         const ctx = this.ctx,
             self = this;
         
         this.stopPreview();
         
         this.setState(Object.assign({}, this.state, {
-            isStarted: true
+            isStarted: true,
+            soundID: soundID
         }));
         
-        if (this.props.previewURL) {
-            fetch(this.props.previewURL)
+        if (soundPreviewURL) {
+            fetch(soundPreviewURL)
                 .then(function(response) {
                     response.arrayBuffer().then(function(buffer) {
                         ctx.decodeAudioData(buffer).then(function(decodedBuffer) {
@@ -67,6 +68,7 @@ class WebAudio extends Component {
                                     self.stopPreview();
                                 };
                                 source.connect(ctx.destination);
+                                console.log(startNormalized * decodedBuffer.duration);
                                 source.start(startNormalized * decodedBuffer.duration);
                                 
                                 // store bufferSource in local state
@@ -74,7 +76,7 @@ class WebAudio extends Component {
                                     previewBufferSource: source
                                 }));
                                 
-                                self.props.dispatch(previewStarted(startNormalized, decodedBuffer.duration));
+                                self.props.dispatch(previewStarted(soundID, startNormalized, decodedBuffer.duration));
                             }
                         })
                     });
@@ -89,11 +91,16 @@ class WebAudio extends Component {
         if (this.state.previewBufferSource) {
             this.state.previewBufferSource.stop();
         }
+        
+        const soundID = this.state.soundID;
+        
         this.setState(Object.assign({}, this.state, {
             isStarted: false,
+            soundID: null,
             previewBufferSource: null
         }));
-        this.props.dispatch(previewStopped());
+        
+        this.props.dispatch(previewStopped(soundID));
     }
   
     render() {
@@ -103,8 +110,7 @@ class WebAudio extends Component {
 
 function mapStateToProps(state) {
     return {
-        events: state.audioState.events,
-        previewURL: selectPreviewURL(state)
+        events: state.audioState.events
     };
 }
 

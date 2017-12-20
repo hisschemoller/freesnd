@@ -85,9 +85,9 @@ class Results extends Component {
                             onPreviewButtonUp={this.stopPreview}
                             onUserOrTagClick={this.performQuery}
                             onDetailButtonClick={this.fetchSoundDetails}
-                            onFavouritesButtonClick={this.addToFavourites}
-                            onPreviewAreaMouseDown={this.startPreview}
-                            onPreviewAreaMouseUp={this.stopPreview} />
+                            onFavouritesButtonClick={this.addToFavourites} />
+                            // onPreviewAreaMouseDown={this.startPreview}
+                            // onPreviewAreaMouseUp={this.stopPreview} />
                     ))}
                 </ul>
             </div>
@@ -95,11 +95,14 @@ class Results extends Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
     return {
         page: state.searchState.page,
         results: state.searchState.results,
-        selectedIndex: state.searchState.selectedIndex
+        selectedIndex: state.searchState.selectedIndex,
+        isPlaying: state.audioState.isPlaying,
+        positionNormalized: state.audioState.positionNormalized,
+        duration: state.audioState.duration
     };
 }
 
