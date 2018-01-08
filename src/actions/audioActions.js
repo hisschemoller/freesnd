@@ -10,7 +10,17 @@ export const PREVIEW_STOPPED = 'PREVIEW_STOPPED';
 /**
  * Action creators
  */
-export function startPreview(soundID, soundPreviewURL, startNormalized) {
+export function startPreview(startNormalized = 0) {
+    return function(dispatch, getState) {
+        const state = getState();
+        const sound = state.searchState.results[state.searchState.selectedIndex];
+        if (sound) {
+            dispatch(startPreviewWithData(sound.id, sound.previews['preview-lq-mp3'], startNormalized));
+        }
+    };
+}
+
+export function startPreviewWithData(soundID, soundPreviewURL, startNormalized) {
     return { type: START_PREVIEW, soundID, soundPreviewURL, startNormalized };
 }
 
