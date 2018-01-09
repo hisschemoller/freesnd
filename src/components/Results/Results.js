@@ -85,9 +85,9 @@ class Results extends Component {
                             onPreviewButtonUp={this.stopPreview}
                             onUserOrTagClick={this.performQuery}
                             onDetailButtonClick={this.fetchSoundDetails}
-                            onFavouritesButtonClick={this.addToFavourites} />
-                            // onPreviewAreaMouseDown={this.startPreview}
-                            // onPreviewAreaMouseUp={this.stopPreview} />
+                            onFavouritesButtonClick={this.addToFavourites} 
+                            onPreviewAreaMouseDown={this.startPreview}
+                            onPreviewAreaMouseUp={this.stopPreview} />
                     ))}
                 </ul>
             </div>

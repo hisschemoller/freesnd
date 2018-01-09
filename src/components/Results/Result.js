@@ -47,11 +47,11 @@ class Result extends Component {
     
     onPreviewAreaMouseDown = (e) => {
         const localMouseXNormalized = (e.pageX - this.getPosition(e.target).x) / e.target.offsetWidth;
-        this.props.dispatch(startPreview(this.props.id, this.props.previews['preview-lq-mp3'], localMouseXNormalized));
+        this.props.onPreviewAreaMouseDown(this.props.index, localMouseXNormalized);
     }
     
     onPreviewAreaMouseUp = (e) => {
-        this.props.dispatch(stopPreview());
+        this.props.onPreviewAreaMouseUp();
     }
     
     /**
