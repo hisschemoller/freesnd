@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { clearEventQueue, START_PREVIEW, STOP_PREVIEW, previewStarted, previewStopped } from '../actions/audioActions';
+import { clearEventQueue, START_PREVIEW, STOP_PREVIEW, previewTimerStarted, previewStopped } from '../actions/audioActions';
 
 class WebAudio extends Component {
     
@@ -68,15 +68,14 @@ class WebAudio extends Component {
                                     self.stopPreview();
                                 };
                                 source.connect(ctx.destination);
-                                console.log(startNormalized * decodedBuffer.duration);
-                                source.start(startNormalized * decodedBuffer.duration);
+                                source.start(0, startNormalized * decodedBuffer.duration);
                                 
                                 // store bufferSource in local state
                                 self.setState(Object.assign({}, self.state, {
                                     previewBufferSource: source
                                 }));
                                 
-                                self.props.dispatch(previewStarted(soundID, startNormalized, decodedBuffer.duration));
+                                self.props.dispatch(previewTimerStarted(soundID));
                             }
                         })
                     });
@@ -88,6 +87,7 @@ class WebAudio extends Component {
     }
     
     stopPreview = () => {
+        console.log('stopPreview');
         if (this.state.previewBufferSource) {
             this.state.previewBufferSource.stop();
         }
