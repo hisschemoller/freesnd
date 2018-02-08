@@ -1,3 +1,4 @@
+@import '../../variables.css';
 
 .pagination {
     display: flex;

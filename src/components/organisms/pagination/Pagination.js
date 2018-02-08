@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { stopPreview } from '../actions/audioActions';
-import { gotoPage, fetchSounds } from '../actions/searchActions';
+import { stopPreview } from '../../../actions/audioActions';
+import { gotoPage, fetchSounds } from '../../../actions/searchActions';
 import s from './Pagination.css';
 
 class Pagination extends Component {

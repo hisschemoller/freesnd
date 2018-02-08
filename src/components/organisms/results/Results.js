@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { startPreview, stopPreview } from '../../actions/audioActions';
-import { addToFavourites } from '../../actions/favsActions';
-import { addToSearchHistory, setQuery, gotoPage, selectSound, nextSound, previousSound, fetchSounds, fetchSound } from '../../actions/searchActions';
-import Result from './Result';
+import { startPreview, stopPreview } from '../../../actions/audioActions';
+import { addToFavourites } from '../../../actions/favsActions';
+import { addToSearchHistory, setQuery, gotoPage, selectSound, nextSound, previousSound, fetchSounds, fetchSound } from '../../../actions/searchActions';
+import Result from '../../molecules/result/Result';
 import s from './Results.css';
 
 class Results extends Component {

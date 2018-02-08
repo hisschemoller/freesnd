@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Favourite from './Favourite';
+import Favourite from '../../molecules/favourite/Favourite';
 import s from './Favourites.css';
-import { removeFavourite } from '../../actions/favsActions';
+import { removeFavourite } from '../../../actions/favsActions';
 
 class Favourites extends Component {
     

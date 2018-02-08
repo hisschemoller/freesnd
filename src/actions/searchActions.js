@@ -87,7 +87,6 @@ export function fetchSound(id) {
                     error => dispatch(rejectSound(error))
                 )
         } else {
-            console.log('exists');
             return Promise.resolve();
         }
     }

@@ -1,30 +1,36 @@
+@import '../../variables.css';
+
 .listitem {
-    color: #ccc;
+    color: var(--black);
     font-size: 0.6rem;
 }
 .listitem--active {
-    color: #999;
+    color: var(--black);
 }
 .row {
     display: flex;
 }
 .waveform {
     background-color: #eee;
-    height: 30px;
+    flex-basis: 120px;
+    flex-shrink: 0;
+    height: 50px; /* 71px; */
     position: relative;
-    width: 100px;
 }
 .locator {
-    background-color: #666;
+    background-color: #f00;
     height: 100%;
     position: absolute;
-    width: 1px;
+    top: 0;
+    width: 2px;
 }
 .waveform img {
-    display: none;
+    height: 100%;
+    width: 100%;
+    filter: grayscale(100%) invert(100%);
 }
 .info {
-    display: none;
+    /* display: none; */
 }
 .name {
     font-size: 1rem;
@@ -32,7 +38,7 @@
 .username {
     background: none;
     border: none;
-    color: #ccc;
+    color: var(--black);;
     font-size: 0.6rem;
     text-decoration: underline;
 }
@@ -42,6 +48,6 @@
 .tag {
     background: none;
     border: none;
-    color: #ccc;
+    color: var(--black);;
     text-decoration: underline;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToSearchHistory, setQuery, setSort, fetchSounds } from '../actions/searchActions';
+import { addToSearchHistory, setQuery, setSort, fetchSounds } from '../../../actions/searchActions';
 
 class Search extends Component {
     

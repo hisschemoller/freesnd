@@ -1,4 +1,18 @@
 
+Previews starten en stoppen.
+- Arrow up en down in lijst.
+- Mousedown en -up preview knop in lijst.
+- Mousedown en -up waveform image in lijst.
+
+Preview scenario 1:
+- Elke Result stuurt startPreview met soundID, previewURL en  eventueel startNormalized.
+
+Preview scenario 2:
+- Results zet de sound als geselecteerd.
+- Results stuurt startPreview actie met eventueel startNormalized als parameter.
+- 
+
+
 <App>
     <Search></Search>
     <Results></Results>

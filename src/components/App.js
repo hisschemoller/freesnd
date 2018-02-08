@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Favourites from './favourites/Favourites';
-import History from './History';
-import Pagination from './Pagination';
-import Results from './results/Results';
-import Search from './Search';
+import Favourites from './organisms/favourites/Favourites';
+import History from './organisms/history/History';
+import Pagination from './organisms/pagination/Pagination';
+import Results from './organisms/results/Results';
+import Search from './organisms/search/Search';
 import WebAudio from './WebAudio';
 
 

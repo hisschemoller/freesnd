@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import s from './Result.css';
-import ResultDetail from './ResultDetail';
+import ResultDetail from '../resultdetail/ResultDetail';
 
 class Result extends Component {
     
@@ -86,7 +86,7 @@ class Result extends Component {
                     <div className={s.waveform} 
                         onMouseDown={(e) => this.onPreviewAreaMouseDown(e)}
                         onMouseUp={() => this.onPreviewAreaMouseUp()}>
-                        <img src={this.props.img} alt={this.props.name} />
+                        <img src={this.props.images.waveform_m} alt={this.props.name} />
                         <div className={s.locator}  style={locatorStyle}></div>
                     </div>
                     <button 

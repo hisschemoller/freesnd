@@ -87,7 +87,6 @@ class WebAudio extends Component {
     }
     
     stopPreview = () => {
-        console.log('stopPreview');
         if (this.state.previewBufferSource) {
             this.state.previewBufferSource.stop();
         }
