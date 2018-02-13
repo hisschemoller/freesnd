@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import s from './Result.css';
 import ResultDetail from '../resultdetail/ResultDetail';
+import Button from '../../atoms/Button/Button';
 
 class Result extends Component {
     
@@ -93,7 +94,8 @@ class Result extends Component {
                         onMouseDown={() => this.props.onPreviewButtonDown(this.props.index)} 
                         onMouseUp={() => this.props.onPreviewButtonUp()}>p</button>
                     <button type="button" onClick={this.toggleDetail}>d</button>
-                    <button type="button" onClick={() => this.props.onFavouritesButtonClick(this.props.id)}>f</button>
+                    <Button onClick={() => this.props.onFavouritesButtonClick(this.props.id)}>f</Button>
+                    <Button>Test</Button>
                     <span>{this.props.counter}</span>
                     <div className={s.info}>
                         <div>

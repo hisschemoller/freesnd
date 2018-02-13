@@ -13,7 +13,7 @@ class Favourites extends Component {
     render() {
         return (
             <div className={s.root}>
-                <h4 className={s.header}>F</h4>
+                <h4 className={s.header}>Favourites</h4>
                 <ul className={s.list}>
                     {this.props.favourites.map((sound, i) => (
                         <Favourite 

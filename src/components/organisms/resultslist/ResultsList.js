@@ -4,7 +4,7 @@ import { startPreview, stopPreview } from '../../../actions/audioActions';
 import { addToFavourites } from '../../../actions/favsActions';
 import { addToSearchHistory, setQuery, gotoPage, selectSound, nextSound, previousSound, fetchSounds, fetchSound } from '../../../actions/searchActions';
 import Result from '../../molecules/result/Result';
-import s from './Results.css';
+import s from './ResultsList.css';
 
 class Results extends Component {
     

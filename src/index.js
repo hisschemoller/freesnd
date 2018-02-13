@@ -7,8 +7,8 @@ import thunkMiddleware from 'redux-thunk';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { PersistGate } from 'redux-persist/es/integration/react'
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import queryString from 'query-string';
+import router from './router';
 import App from './components/App';
 import audioReducer from './reducers/audioReducer';
 import favsReducer from './reducers/favsReducer';
@@ -44,13 +44,34 @@ const store = configureStore(combinedReducer);
 
 const persistor = persistStore(store);
 
-ReactDOM.render(
-    <Provider store={store}>
-        <PersistGate persistor={persistor}>
-            <App />
-        </PersistGate>
-    </Provider>,
-    document.getElementById('root')
-);
+const context = {};
 
-registerServiceWorker();
+
+// Re-render the app when window.location changes
+async function onLocationChange(location, action) {
+    try {
+        const route = await router.resolve({
+            ...context,
+            pathname: location.pathname,
+            query: queryString.parse(location.search)
+        });
+
+        ReactDOM.render(
+            <Provider store={store}>
+                <PersistGate persistor={persistor}>
+                    <App context={context}>{route.component}</App>
+                </PersistGate>
+            </Provider>,
+            document.getElementById('root'),
+            () => {
+                document.title = route.title;
+                // updateMeta('description', route.description);
+            }
+        );
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+let currentLocation = window.location;
+onLocationChange(currentLocation);
