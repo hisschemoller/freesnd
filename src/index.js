@@ -9,6 +9,7 @@ import storage from 'redux-persist/lib/storage';
 import { PersistGate } from 'redux-persist/es/integration/react'
 import queryString from 'query-string';
 import router from './router';
+import { updateMeta } from './DOMUtils';
 import App from './components/App';
 import audioReducer from './reducers/audioReducer';
 import favsReducer from './reducers/favsReducer';
@@ -65,7 +66,7 @@ async function onLocationChange(location, action) {
             document.getElementById('root'),
             () => {
                 document.title = route.title;
-                // updateMeta('description', route.description);
+                updateMeta('description', route.description);
             }
         );
     } catch (error) {
