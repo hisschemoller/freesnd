@@ -1,0 +1,16 @@
+@import '../../variables.css';
+
+.root {
+  min-width: 100%;
+  padding-left: var(--gutter-width);
+  padding-right: var(--gutter-width);
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: var(--max-content-width);
+  min-height: 100%;
+}

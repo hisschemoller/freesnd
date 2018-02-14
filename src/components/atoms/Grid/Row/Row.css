@@ -1,0 +1,12 @@
+@import '../../../variables.css';
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -var(--gutter-width);
+  margin-right: -var(--gutter-width);
+}
+
+.no-gutters {
+  margin: 0 auto;
+}
