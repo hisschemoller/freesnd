@@ -5,6 +5,10 @@ const routes = {
     // Keep in mind, routes are evaluated in order
     children: [
         {
+            path: '(/browse)',
+            load: () => import(/* webpackChunkName: 'browse' */ './browse'),
+        }, 
+        {
             path: '(.*)',
             load: () => import(/* webpackChunkName: 'browse' */ './browse'),
         }
